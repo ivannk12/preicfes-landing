@@ -1,179 +1,232 @@
 // app/page.tsx
-import React from "react";
+// Preicfes Material – Landing Page (Mobile First, CRO-focused)
 
-const WHATSAPP_LINK =
-  "https://wa.link/icfesmaterial";
-const PRICE = "$60.000";
+import type { Metadata } from "next";
 
-function Badge({ children }: { children: React.ReactNode }) {
-  return (
-    <span className="inline-flex items-center rounded-full border px-3 py-1 text-sm">
-      {children}
-    </span>
-  );
-}
+/* =====================
+   CONFIGURACIÓN GLOBAL
+===================== */
 
-function Card({
-  title,
-  children,
-}: {
-  title: string;
-  children: React.ReactNode;
-}) {
-  return (
-    <div className="rounded-2xl border bg-white p-5 shadow-sm">
-      <h3 className="text-lg font-semibold">{title}</h3>
-      <div className="mt-2 text-sm text-slate-600">{children}</div>
-    </div>
-  );
-}
+const WHATSAPP_NUMBER = "573000000000"; // ← CAMBIA AQUÍ
+const WHATSAPP_MESSAGE = "Hola, quiero información sobre Preicfes Material y el plan personalizado.";
+const WHATSAPP_LINK = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`;
 
-function CTA({ label = "Escríbenos por WhatsApp" }: { label?: string }) {
-  return (
-    <a
-      href={WHATSAPP_LINK}
-      target="_blank"
-      rel="noreferrer"
-      className="inline-flex items-center justify-center rounded-2xl bg-black px-5 py-3 text-base font-semibold text-white shadow-sm transition hover:opacity-90"
-    >
-      {label} →
-    </a>
-  );
-}
+export const metadata: Metadata = {
+  title: "Preicfes Material | Prepárate para el ICFES con ventaja real",
+  description:
+    "Plan de estudio personalizado, +2.000 preguntas explicadas, formularios automáticos y actualizaciones semanales. Prepárate para el ICFES con Preicfes Material.",
+  openGraph: {
+    title: "Preicfes Material",
+    description:
+      "La preparación ICFES más completa y clara: plan personalizado, preguntas explicadas y acompañamiento.",
+    url: "https://www.preicfesmaterial.com",
+    siteName: "Preicfes Material",
+    locale: "es_CO",
+    type: "website",
+  },
+};
+
+/* =====================
+   PÁGINA PRINCIPAL
+===================== */
 
 export default function Page() {
   return (
-    <main className="min-h-screen bg-slate-50 text-slate-900">
-      {/* Header */}
-      <header className="sticky top-0 z-50 border-b bg-white/80 backdrop-blur">
-        <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3">
-          <div className="flex items-center gap-3">
-            <div className="grid h-10 w-10 place-items-center rounded-2xl bg-black text-white font-bold">
-              PM
-            </div>
-            <div>
-              <div className="font-semibold">Preicfes Material</div>
-              <div className="text-xs text-slate-500">ICFES 2026</div>
-            </div>
-          </div>
-          <CTA />
-        </div>
-      </header>
-
-      {/* Hero */}
-      <section className="mx-auto max-w-6xl px-4 py-14">
-        <div className="grid gap-10 lg:grid-cols-2 lg:items-center">
-          <div>
-            <div className="flex flex-wrap gap-2">
-              <Badge>📘 Pago único</Badge>
-              <Badge>🧠 Respuestas explicadas</Badge>
-              <Badge>🚀 Actualizaciones</Badge>
-            </div>
-
-            <h1 className="mt-6 text-4xl font-extrabold tracking-tight sm:text-5xl">
-              El material más completo para el{" "}
-              <span className="underline decoration-black/20">
-                ICFES 2026
-              </span>
-            </h1>
-
-            <p className="mt-4 text-lg text-slate-600">
-              Plan de estudio personalizado + cuadernillos oficiales (2010–2025)
-              + más de 2.000 preguntas con respuestas explicadas + formularios con
-              calificación automática.
-            </p>
-
-            <div className="mt-6 flex flex-col gap-4 sm:flex-row sm:items-center">
-              <CTA label="Quiero el material completo" />
-              <div className="rounded-2xl border bg-white px-5 py-3">
-                <div className="text-xs text-slate-500">Inversión</div>
-                <div className="text-xl font-bold">{PRICE}</div>
-              </div>
-            </div>
-          </div>
-
-          {/* Right block */}
-          <div className="rounded-3xl border bg-white p-6 shadow-sm">
-            <div className="rounded-2xl bg-slate-900 p-6 text-white">
-              <h3 className="text-2xl font-bold">¿Qué incluye?</h3>
-              <ul className="mt-4 space-y-3 text-sm">
-                <li>✅ Plan de estudio personalizado</li>
-                <li>✅ +72 formularios con calificación automática</li>
-                <li>✅ +2.000 preguntas explicadas</li>
-                <li>✅ Cuadernillos oficiales ICFES</li>
-                <li>✅ Acceso permanente</li>
-              </ul>
-              <div className="mt-6">
-                <a
-                  href={WHATSAPP_LINK}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="block rounded-2xl bg-white px-5 py-3 text-center font-semibold text-slate-900"
-                >
-                  Empezar ahora →
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* How it works */}
-      <section className="mx-auto max-w-6xl px-4 pb-16">
-        <h2 className="text-2xl font-bold">Cómo funciona</h2>
-        <div className="mt-6 grid gap-4 md:grid-cols-3">
-          <Card title="1️⃣ Escríbenos">
-            Nos contactas por WhatsApp y te enviamos la información completa.
-          </Card>
-          <Card title="2️⃣ Recibes acceso">
-            Te damos acceso inmediato y te explicamos cómo usar el material.
-          </Card>
-          <Card title="3️⃣ Estudias con método">
-            Cada día sabes exactamente qué hacer para subir tu puntaje.
-          </Card>
-        </div>
-      </section>
-
-      {/* FAQ */}
-      <section className="mx-auto max-w-6xl px-4 pb-20">
-        <div className="rounded-3xl border bg-white p-6 shadow-sm">
-          <h2 className="text-2xl font-bold">Preguntas frecuentes</h2>
-          <div className="mt-4 grid gap-4 md:grid-cols-2">
-            <Card title="¿Es pago único?">
-              Sí. Pagas una sola vez y tienes acceso permanente.
-            </Card>
-            <Card title="¿Cómo lo recibo?">
-              Te enviamos todo por WhatsApp con instrucciones claras.
-            </Card>
-            <Card title="¿Sirve si voy mal en una materia?">
-              Sí. Puedes reforzar las materias más débiles.
-            </Card>
-            <Card title="¿Tiene explicaciones?">
-              Todas las preguntas vienen con explicación detallada.
-            </Card>
-          </div>
-
-          <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between rounded-2xl bg-slate-50 p-5">
-            <div>
-              <div className="text-sm text-slate-500">
-                ¿Listo para empezar?
-              </div>
-              <div className="text-xl font-bold">
-                Escríbenos y recibe el material hoy mismo.
-              </div>
-            </div>
-            <CTA />
-          </div>
-        </div>
-      </section>
-
-      {/* Footer */}
-      <footer className="border-t bg-white">
-        <div className="mx-auto max-w-6xl px-4 py-8 text-sm text-slate-500">
-          © {new Date().getFullYear()} Preicfes Material — Todos los derechos
-          reservados.
-        </div>
-      </footer>
+    <main className="min-h-screen bg-neutral-950 text-neutral-100">
+      <Hero />
+      <SocialProof />
+      <Includes />
+      <HowItWorks />
+      <ForWho />
+      <FAQs />
+      <FinalCTA />
+      <Footer />
+      <FloatingWhatsApp />
     </main>
   );
 }
+
+/* =====================
+   SECCIONES
+===================== */
+
+const Hero = () => (
+  <section className="px-6 pt-20 pb-16 max-w-6xl mx-auto">
+    <div className="flex flex-col gap-6">
+      <span className="inline-block w-fit rounded-full bg-emerald-500/10 px-3 py-1 text-sm text-emerald-400">
+        Preparación ICFES 2026
+      </span>
+      <h1 className="text-4xl md:text-5xl font-bold leading-tight">
+        Prepárate para el ICFES con un <span className="text-emerald-400">plan hecho para ti</span>
+      </h1>
+      <p className="text-neutral-300 max-w-xl">
+        No más estudiar a ciegas. Accede al material más completo del país: preguntas reales,
+        explicaciones claras y un plan personalizado según tu nivel y tiempo.
+      </p>
+      <ul className="grid gap-3 text-neutral-200">
+        <li>✅ +2.000 preguntas actualizadas con respuestas explicadas</li>
+        <li>✅ 72 formularios con calificación automática</li>
+        <li>✅ Plan de estudio personalizado</li>
+        <li>✅ Acceso permanente + actualizaciones semanales</li>
+      </ul>
+      <div className="flex gap-4 flex-col sm:flex-row">
+        <a
+          href={WHATSAPP_LINK}
+          className="rounded-xl bg-emerald-500 px-6 py-4 text-center font-semibold text-neutral-950 hover:bg-emerald-400 transition"
+        >
+          Hablar por WhatsApp
+        </a>
+        <a
+          href="#includes"
+          className="rounded-xl border border-neutral-700 px-6 py-4 text-center font-semibold hover:bg-neutral-900 transition"
+        >
+          Ver qué incluye
+        </a>
+      </div>
+    </div>
+  </section>
+);
+
+const SocialProof = () => (
+  <section className="px-6 py-14 bg-neutral-900">
+    <div className="max-w-6xl mx-auto">
+      <h2 className="text-2xl font-semibold mb-6">Resultados reales de estudiantes reales</h2>
+      <div className="grid gap-4 md:grid-cols-3">
+        {[1, 2, 3].map((i) => (
+          <div
+            key={i}
+            className="rounded-xl border border-neutral-800 p-4 text-neutral-300"
+          >
+            Testimonio #{i} (placeholder)
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+);
+
+const Includes = () => (
+  <section id="includes" className="px-6 py-16 max-w-6xl mx-auto">
+    <h2 className="text-3xl font-bold mb-10">¿Qué incluye Preicfes Material?</h2>
+    <div className="grid gap-6 md:grid-cols-2">
+      {[
+        {
+          title: "Plan de estudio personalizado",
+          desc: "Organizado según tus fechas, tiempo disponible y nivel actual.",
+        },
+        {
+          title: "72 formularios automáticos",
+          desc: "Calificación inmediata para medir tu progreso real.",
+        },
+        {
+          title: "+2.000 preguntas explicadas",
+          desc: "Basadas en cuadernillos oficiales 2010–2025.",
+        },
+        {
+          title: "Acceso permanente",
+          desc: "Sin vencimiento. Incluye actualizaciones semanales.",
+        },
+      ].map((item) => (
+        <div
+          key={item.title}
+          className="rounded-2xl border border-neutral-800 p-6 hover:border-emerald-500/40 transition"
+        >
+          <h3 className="font-semibold text-lg mb-2">{item.title}</h3>
+          <p className="text-neutral-400">{item.desc}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+);
+
+const HowItWorks = () => (
+  <section className="px-6 py-16 bg-neutral-900">
+    <div className="max-w-6xl mx-auto">
+      <h2 className="text-3xl font-bold mb-10">¿Cómo funciona?</h2>
+      <ol className="grid gap-6 md:grid-cols-3">
+        <li className="rounded-xl border border-neutral-800 p-6">
+          <span className="text-emerald-400 font-bold">1.</span>
+          <p className="mt-2">Escribes por WhatsApp y te orientamos según tu caso.</p>
+        </li>
+        <li className="rounded-xl border border-neutral-800 p-6">
+          <span className="text-emerald-400 font-bold">2.</span>
+          <p className="mt-2">Recibes tu plan y acceso completo al material.</p>
+        </li>
+        <li className="rounded-xl border border-neutral-800 p-6">
+          <span className="text-emerald-400 font-bold">3.</span>
+          <p className="mt-2">Estudias con estrategia y mides tu avance real.</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+);
+
+const ForWho = () => (
+  <section className="px-6 py-16 max-w-6xl mx-auto">
+    <h2 className="text-3xl font-bold mb-10">¿Para quién es?</h2>
+    <div className="grid gap-6 md:grid-cols-3">
+      <div className="rounded-xl border border-neutral-800 p-6">🎓 Estudiantes que quieren subir su puntaje</div>
+      <div className="rounded-xl border border-neutral-800 p-6">👨‍👩‍👧 Padres que buscan un método serio y guiado</div>
+      <div className="rounded-xl border border-neutral-800 p-6">📘 Docentes que apoyan con material actualizado</div>
+    </div>
+  </section>
+);
+
+const FAQs = () => (
+  <section className="px-6 py-16 bg-neutral-900">
+    <div className="max-w-4xl mx-auto">
+      <h2 className="text-3xl font-bold mb-8">Preguntas frecuentes</h2>
+      <div className="space-y-4">
+        <FAQ q="¿Sirve si voy mal en el colegio?" a="Sí. El plan se adapta a tu nivel actual." />
+        <FAQ q="¿Es solo para 11°?" a="No. Funciona desde 9° en adelante." />
+        <FAQ q="¿Cuánto tiempo tengo acceso?" a="Acceso permanente." />
+        <FAQ q="¿Es digital?" a="Sí, todo es online y accesible desde cualquier dispositivo." />
+      </div>
+    </div>
+  </section>
+);
+
+const FAQ = ({ q, a }: { q: string; a: string }) => (
+  <div className="rounded-xl border border-neutral-800 p-4">
+    <p className="font-semibold">{q}</p>
+    <p className="text-neutral-400 mt-2">{a}</p>
+  </div>
+);
+
+const FinalCTA = () => (
+  <section className="px-6 py-20 text-center max-w-3xl mx-auto">
+    <h2 className="text-3xl md:text-4xl font-bold mb-4">
+      Empieza hoy a prepararte con ventaja
+    </h2>
+    <p className="text-neutral-400 mb-8">
+      Cada punto cuenta. No dejes tu resultado al azar.
+    </p>
+    <a
+      href={WHATSAPP_LINK}
+      className="inline-block rounded-xl bg-emerald-500 px-8 py-4 font-semibold text-neutral-950 hover:bg-emerald-400 transition"
+    >
+      Hablar por WhatsApp
+    </a>
+  </section>
+);
+
+const Footer = () => (
+  <footer className="px-6 py-10 border-t border-neutral-800 text-sm text-neutral-500">
+    <div className="max-w-6xl mx-auto flex flex-col gap-4 md:flex-row md:justify-between">
+      <p>© {new Date().getFullYear()} Preicfes Material</p>
+      <a href={WHATSAPP_LINK} className="hover:text-neutral-300">
+        Contacto
+      </a>
+    </div>
+  </footer>
+);
+
+const FloatingWhatsApp = () => (
+  <a
+    href={WHATSAPP_LINK}
+    className="fixed bottom-5 right-5 rounded-full bg-emerald-500 p-4 shadow-lg text-neutral-950 hover:bg-emerald-400 transition"
+    aria-label="WhatsApp"
+  >
+    💬
+  </a>
+);
