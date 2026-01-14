@@ -137,10 +137,6 @@ export default function LandingClient() {
 
   return (
     <main className="relative min-h-[100svh] overflow-x-hidden bg-neutral-950 text-neutral-50 selection:bg-fuchsia-400/30 selection:text-white">
-      <NeonBackground />
-
-      <TopBar waLink={waGeneral} />
-
       <Hero
         onViewPackages={() => scrollToId("packages")}
         onMiniTest={() => scrollToId("mini-test")}
@@ -245,52 +241,6 @@ export default function LandingClient() {
 }
 
 /* ======================================================
-   UI: Background / TopBar
-====================================================== */
-
-function NeonBackground() {
-  return (
-    <div aria-hidden className="pointer-events-none fixed inset-0 -z-10 overflow-hidden">
-      {/* Orbes difuminados */}
-      <div className="absolute -top-24 left-1/2 h-[520px] w-[520px] max-h-[100vh] max-w-[100vw] -translate-x-1/2 rounded-full bg-fuchsia-500/20 blur-[90px]" />
-      <div className="absolute top-[30%] -left-24 h-[520px] w-[520px] max-h-[100vh] max-w-[100vw] rounded-full bg-cyan-400/15 blur-[110px]" />
-      <div className="absolute bottom-[-140px] right-[-120px] h-[560px] w-[560px] max-h-[100vh] max-w-[100vw] rounded-full bg-emerald-400/15 blur-[120px]" />
-
-      {/* Grid sutil */}
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.05)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.05)_1px,transparent_1px)] bg-[size:28px_28px] opacity-[0.12]" />
-
-      {/* Vignette */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_30%,rgba(0,0,0,0.85)_75%)]" />
-    </div>
-  );
-}
-
-function TopBar({ waLink }: { waLink: string }) {
-  return (
-    <header className="sticky top-0 z-40 border-b border-white/10 bg-neutral-950/70 backdrop-blur supports-[backdrop-filter]:bg-neutral-950/50">
-      <div className="mx-auto flex max-w-6xl items-center justify-between px-5 py-3">
-        <div className="flex items-center gap-3">
-          <div className="grid h-9 w-9 place-items-center rounded-xl border border-white/10 bg-white/5">
-            <span className="text-sm font-black tracking-tight text-white">P</span>
-          </div>
-          <div className="leading-tight">
-            <div className="text-sm font-semibold text-white">{BRAND}</div>
-            <div className="text-xs text-white/60">ICFES 2026 · Único pago</div>
-          </div>
-        </div>
-
-        <a
-          href={waLink}
-          className="rounded-xl bg-white text-neutral-950 px-4 py-2 text-sm font-semibold hover:bg-white/90 focus:outline-none focus-visible:ring-2 focus-visible:ring-fuchsia-300"
-        >
-          Hablar por WhatsApp
-        </a>
-      </div>
-    </header>
-  );
-}
-
-/* ======================================================
    HERO
 ====================================================== */
 
@@ -306,67 +256,77 @@ function Hero({
   rightContent?: React.ReactNode;
 }) {
   return (
-    <section className="relative mx-auto max-w-6xl px-5 pt-8 pb-10 md:pt-12 bg-glow bg-glow-hero" aria-label="Hero">
-      <div className={cn("grid gap-10 md:items-center", rightContent ? "md:grid-cols-2" : undefined)}>
-        <div className="space-y-6">
-          <div className="flex flex-wrap items-center gap-2">
-            <span className="inline-flex items-center rounded-full border border-orange-400/30 bg-orange-400/10 px-3 py-1 text-xs font-semibold tracking-wide text-orange-300">
-            ÚNICO PAGO
-            </span>
-            <Badge variant="cyan">Actualizaciones semanales</Badge>
-            <Badge variant="emerald">Acceso permanente</Badge>
+    <div className="bg-glow bg-glow-hero">
+      <section className="relative mx-auto max-w-6xl px-5 pt-8 pb-10 md:pt-12" aria-label="Hero">
+        <div className={cn("grid gap-10 md:items-center", rightContent ? "md:grid-cols-2" : undefined)}>
+          <div className="space-y-6">
+            <div className="flex justify-center">
+              <img
+                src="/logos/logo2blancov1sinfondo.png"
+                alt="PreICFES Material"
+                className="h-24 md:h-32 lg:h-40 w-auto object-contain drop-shadow-[0_0_40px_rgba(56,189,248,0.45)]"
+              />
+            </div>
+
+            <div className="flex flex-wrap items-center gap-2">
+              <span className="inline-flex items-center rounded-full border border-orange-400/30 bg-orange-400/10 px-3 py-1 text-xs font-semibold tracking-wide text-orange-300">
+              ÚNICO PAGO
+              </span>
+              <Badge variant="cyan">Actualizaciones semanales</Badge>
+              <Badge variant="emerald">Acceso permanente</Badge>
+            </div>
+
+            <h1 className="text-4xl font-black leading-[1.05] tracking-tight md:text-5xl">
+              Prepárate para el ICFES con el <span className="text-glow">mejor material de estudio</span> de todo el país
+            </h1>
+
+            <p className="text-base leading-relaxed text-white/75 md:text-lg">
+              ¿Te imaginas tener en tu bolsillo todo el material que necesitas para un puntaje alto en el ICFES
+              con un <span className="text-white">Plan de Estudio Personalizado</span> a tu ritmo?
+            </p>
+
+            <ul className="space-y-2 text-sm text-white/80">
+              <li className="flex gap-2">
+                <Check /> <span>Preguntas reales <b className="text-white">actualizadas</b></span>
+              </li>
+              <li className="flex gap-2">
+                <Check /> <span>Respuestas explicadas <b className="text-white">paso a paso</b></span>
+              </li>
+              <li className="flex gap-2">
+                <Check /> <span>Formularios con <b className="text-white">calificación automática</b></span>
+              </li>
+            </ul>
+
+            <div className="flex flex-col gap-3 sm:flex-row">
+              <button onClick={onViewPackages} className="btn-primary">
+                Ver Paquetes
+              </button>
+              <button onClick={onMiniTest} className="btn-secondary">
+                Mini Test Diagnóstico Gratis
+              </button>
+            </div>
+
+            <div className="flex items-center gap-3 text-xs text-white/60">
+              <span className="inline-flex items-center gap-2">
+                <span className="h-2 w-2 rounded-full bg-emerald-400 shadow-[0_0_18px_rgba(52,211,153,0.6)]" />
+                Entrega inmediata por WhatsApp
+              </span>
+              <span className="h-1 w-1 rounded-full bg-white/30" />
+              <a className="underline hover:text-white" href={waLink}>
+                ¿Dudas? Escríbeme
+              </a>
+            </div>
           </div>
 
-          <h1 className="text-4xl font-black leading-[1.05] tracking-tight md:text-5xl">
-            Prepárate para el ICFES con el <span className="text-glow">mejor material de estudio</span> de todo el país
-          </h1>
-
-          <p className="text-base leading-relaxed text-white/75 md:text-lg">
-            ¿Te imaginas tener en tu bolsillo todo el material que necesitas para un puntaje alto en el ICFES
-            con un <span className="text-white">Plan de Estudio Personalizado</span> a tu ritmo?
-          </p>
-
-          <ul className="space-y-2 text-sm text-white/80">
-            <li className="flex gap-2">
-              <Check /> <span>Preguntas reales <b className="text-white">actualizadas</b></span>
-            </li>
-            <li className="flex gap-2">
-              <Check /> <span>Respuestas explicadas <b className="text-white">paso a paso</b></span>
-            </li>
-            <li className="flex gap-2">
-              <Check /> <span>Formularios con <b className="text-white">calificación automática</b></span>
-            </li>
-          </ul>
-
-          <div className="flex flex-col gap-3 sm:flex-row">
-            <button onClick={onViewPackages} className="btn-primary">
-              Ver Paquetes
-            </button>
-            <button onClick={onMiniTest} className="btn-secondary">
-              Mini Test Diagnóstico Gratis
-            </button>
-          </div>
-
-          <div className="flex items-center gap-3 text-xs text-white/60">
-            <span className="inline-flex items-center gap-2">
-              <span className="h-2 w-2 rounded-full bg-emerald-400 shadow-[0_0_18px_rgba(52,211,153,0.6)]" />
-              Entrega inmediata por WhatsApp
-            </span>
-            <span className="h-1 w-1 rounded-full bg-white/30" />
-            <a className="underline hover:text-white" href={waLink}>
-              ¿Dudas? Escríbeme
-            </a>
-          </div>
+          {rightContent ? (
+            <div className="relative">
+              {rightContent}
+              <div className="pointer-events-none absolute -inset-4 -z-10 rounded-[28px] bg-[radial-gradient(circle_at_top,rgba(34,211,238,0.12),transparent_55%)]" />
+            </div>
+          ) : null}
         </div>
-
-        {rightContent ? (
-          <div className="relative">
-            {rightContent}
-            <div className="pointer-events-none absolute -inset-4 -z-10 rounded-[28px] bg-[radial-gradient(circle_at_top,rgba(34,211,238,0.12),transparent_55%)]" />
-          </div>
-        ) : null}
-      </div>
-    </section>
+      </section>
+    </div>
   );
 }
 
@@ -396,70 +356,72 @@ function VideoSection({
   secondary?: { label: string; onClick?: () => void; href?: string };
 }) {
   return (
-    <section id={id} className="mx-auto max-w-6xl px-5 py-10 md:py-14 bg-glow bg-glow-video">
-      <div className="grid gap-6 md:grid-cols-2 md:items-center">
-        <div className="space-y-4">
-          <div className="text-xs font-semibold tracking-widest text-white/60">{eyebrow}</div>
-          <h2 className="text-2xl font-black tracking-tight md:text-3xl">{title}</h2>
-          <p className="text-sm leading-relaxed text-white/70">{subtitle}</p>
+    <div className="bg-glow bg-glow-video">
+      <section id={id} className="mx-auto max-w-6xl px-5 py-10 md:py-14">
+        <div className="grid gap-6 md:grid-cols-2 md:items-center">
+          <div className="space-y-4">
+            <div className="text-xs font-semibold tracking-widest text-white/60">{eyebrow}</div>
+            <h2 className="text-2xl font-black tracking-tight md:text-3xl">{title}</h2>
+            <p className="text-sm leading-relaxed text-white/70">{subtitle}</p>
 
-          <ul className="space-y-2 text-sm text-white/75">
-            {bullets.map((b) => (
-              <li key={b} className="flex gap-2">
-                <Spark /> <span>{b}</span>
-              </li>
-            ))}
-          </ul>
+            <ul className="space-y-2 text-sm text-white/75">
+              {bullets.map((b) => (
+                <li key={b} className="flex gap-2">
+                  <Spark /> <span>{b}</span>
+                </li>
+              ))}
+            </ul>
 
-          <div className="flex flex-col gap-3 sm:flex-row">
-            {primary.href ? (
-              <a className="btn-primary" href={primary.href}>
-                {primary.label}
-              </a>
-            ) : (
-              <button className="btn-primary" onClick={primary.onClick}>
-                {primary.label}
-              </button>
-            )}
-
-            {secondary ? (
-              secondary.href ? (
-                <a className="btn-secondary" href={secondary.href}>
-                  {secondary.label}
+            <div className="flex flex-col gap-3 sm:flex-row">
+              {primary.href ? (
+                <a className="btn-primary" href={primary.href}>
+                  {primary.label}
                 </a>
               ) : (
-                <button className="btn-secondary" onClick={secondary.onClick}>
-                  {secondary.label}
+                <button className="btn-primary" onClick={primary.onClick}>
+                  {primary.label}
                 </button>
-              )
-            ) : null}
-          </div>
-        </div>
+              )}
 
-        <div className="card-neo overflow-hidden p-0">
-          <div className="aspect-video w-full bg-white/5">
-            {embedUrl ? (
-              <iframe
-                className="h-full w-full"
-                src={embedUrl}
-                title={title}
-                loading="lazy"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                allowFullScreen
-              />
-            ) : (
-              <div className="grid h-full place-items-center px-6 text-center text-xs text-white/60">
-                <div>
-                  <div className="font-semibold text-white">Pega aquí tu embed URL</div>
-                  <div className="mt-1">Edita VIDEO_PRESENTATION_URL / VIDEO_WALKTHROUGH_URL.</div>
-                  <div className="mt-3">Recomendado: YouTube no listado (embed).</div>
+              {secondary ? (
+                secondary.href ? (
+                  <a className="btn-secondary" href={secondary.href}>
+                    {secondary.label}
+                  </a>
+                ) : (
+                  <button className="btn-secondary" onClick={secondary.onClick}>
+                    {secondary.label}
+                  </button>
+                )
+              ) : null}
+            </div>
+          </div>
+
+          <div className="card-neo overflow-hidden p-0">
+            <div className="aspect-video w-full bg-white/5">
+              {embedUrl ? (
+                <iframe
+                  className="h-full w-full"
+                  src={embedUrl}
+                  title={title}
+                  loading="lazy"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowFullScreen
+                />
+              ) : (
+                <div className="grid h-full place-items-center px-6 text-center text-xs text-white/60">
+                  <div>
+                    <div className="font-semibold text-white">Pega aquí tu embed URL</div>
+                    <div className="mt-1">Edita VIDEO_PRESENTATION_URL / VIDEO_WALKTHROUGH_URL.</div>
+                    <div className="mt-3">Recomendado: YouTube no listado (embed).</div>
+                  </div>
                 </div>
-              </div>
-            )}
+              )}
+            </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </div>
   );
 }
 
@@ -498,38 +460,40 @@ function TestimonialsSection() {
   }, [tab, TESTIMONIALS]);
 
   return (
-    <section className="mx-auto max-w-6xl px-5 py-10 md:py-14 bg-glow bg-glow-proof" aria-label="Testimonios">
-      <div className="flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
-        <div>
-          <div className="text-xs font-semibold tracking-widest text-white/60">PRUEBA SOCIAL</div>
-          <h2 className="mt-2 text-2xl font-black tracking-tight md:text-3xl">
-            Resultados y chats reales
-          </h2>
-          <p className="mt-2 text-sm text-white/70">
-            Reemplaza estos placeholders por tus capturas (puntajes y chats). No hace falta texto largo.
-          </p>
+    <div className="bg-glow bg-glow-proof">
+      <section className="mx-auto max-w-6xl px-5 py-10 md:py-14" aria-label="Testimonios">
+        <div className="flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
+          <div>
+            <div className="text-xs font-semibold tracking-widest text-white/60">PRUEBA SOCIAL</div>
+            <h2 className="mt-2 text-2xl font-black tracking-tight md:text-3xl">
+              Resultados y chats reales
+            </h2>
+            <p className="mt-2 text-sm text-white/70">
+              Reemplaza estos placeholders por tus capturas (puntajes y chats). No hace falta texto largo.
+            </p>
+          </div>
+
+          <div className="flex gap-2">
+            <button onClick={() => setTab("all")} className={cn("chip-btn", tab === "all" && "chip-btn-active")}>
+              Todos
+            </button>
+            <button
+              onClick={() => setTab("puntaje")}
+              className={cn("chip-btn", tab === "puntaje" && "chip-btn-active")}
+            >
+              Puntajes
+            </button>
+            <button onClick={() => setTab("chat")} className={cn("chip-btn", tab === "chat" && "chip-btn-active")}>
+              Chats
+            </button>
+          </div>
         </div>
 
-        <div className="flex gap-2">
-          <button onClick={() => setTab("all")} className={cn("chip-btn", tab === "all" && "chip-btn-active")}>
-            Todos
-          </button>
-          <button
-            onClick={() => setTab("puntaje")}
-            className={cn("chip-btn", tab === "puntaje" && "chip-btn-active")}
-          >
-            Puntajes
-          </button>
-          <button onClick={() => setTab("chat")} className={cn("chip-btn", tab === "chat" && "chip-btn-active")}>
-            Chats
-          </button>
+        <div className="mt-6">
+          <HorizontalGallery items={filtered} />
         </div>
-      </div>
-
-      <div className="mt-6">
-        <HorizontalGallery items={filtered} />
-      </div>
-    </section>
+      </section>
+    </div>
   );
 }
 
@@ -865,108 +829,110 @@ function PackagesSection({
   ];
 
   return (
-    <section id="packages" className="mx-auto max-w-6xl px-5 py-10 md:py-14 bg-glow bg-glow-packages" aria-label="Paquetes">
-      <div className="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
-        <div>
-          <div className="text-xs font-semibold tracking-widest text-white/60">OFERTAS</div>
-          <h2 className="mt-2 text-2xl font-black tracking-tight md:text-3xl">
-            Elige tu paquete
-          </h2>
-          <p className="mt-2 text-sm text-white/70">
-            Pago único · Acceso permanente · Actualizaciones semanales
-          </p>
-        </div>
-        <div className="text-xs text-white/60">Luego bajas a “Métodos de pago”</div>
-      </div>
-
-      <div className="mt-6 grid gap-4 md:grid-cols-2">
-        {/* Paquete 1 */}
-        <div
-          className={cn(
-            "card-neo p-6",
-            selected === 1 && "ring-1 ring-cyan-300/40 shadow-[0_0_32px_rgba(34,211,238,0.10)]"
-          )}
-        >
-          <div className="flex items-start justify-between gap-3">
-            <div>
-              <div className="text-xs text-white/60">PAQUETE #1</div>
-              <div className="mt-1 text-lg font-black">{PACKAGE_1_NAME}</div>
-            </div>
-            <button
-              type="button"
-              className={cn("select-pill", selected === 1 && "select-pill-active")}
-              onClick={() => onSelect(1)}
-            >
-              {selected === 1 ? "Seleccionado" : "Seleccionar"}
-            </button>
+    <div className="bg-glow bg-glow-packages">
+      <section id="packages" className="mx-auto max-w-6xl px-5 py-10 md:py-14" aria-label="Paquetes">
+        <div className="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
+          <div>
+            <div className="text-xs font-semibold tracking-widest text-white/60">OFERTAS</div>
+            <h2 className="mt-2 text-2xl font-black tracking-tight md:text-3xl">
+              Elige tu paquete
+            </h2>
+            <p className="mt-2 text-sm text-white/70">
+              Pago único · Acceso permanente · Actualizaciones semanales
+            </p>
           </div>
-
-          <div className="mt-4 flex items-end gap-3">
-            <div className="text-3xl font-black">{formatCOP(PRICE_1_NOW)}</div>
-            <div className="text-sm text-white/60 line-through">{formatCOP(PRICE_1_OLD)}</div>
-            <div className="ml-auto text-xs text-white/60">COP</div>
-          </div>
-
-          <div className="mt-4 grid gap-2 text-sm text-white/75">
-            {p1Bullets.map((b) => (
-              <div key={b} className="flex gap-2"><Check /> {b}</div>
-            ))}
-          </div>
-
-          <button onClick={onGoPay} className="btn-primary mt-6 w-full">
-            ¡Quiero el Paquete #1!
-          </button>
-          <div className="mt-3 text-center text-xs text-white/60">Te lleva a Métodos de pago ↓</div>
+          <div className="text-xs text-white/60">Luego bajas a “Métodos de pago”</div>
         </div>
 
-        {/* Paquete 2 */}
-        <div
-          className={cn(
-            "card-neo p-6",
-            "border-fuchsia-400/30 bg-fuchsia-500/10",
-            selected === 2 && "ring-1 ring-fuchsia-300/50 shadow-[0_0_44px_rgba(232,121,249,0.14)]"
-          )}
-        >
-          <div className="flex items-start justify-between gap-3">
-            <div>
-              <div className="flex items-center gap-2">
-                <div className="text-xs text-white/60">PAQUETE #2</div>
-                <span className="rounded-full bg-fuchsia-400/15 px-2 py-0.5 text-[11px] font-semibold text-fuchsia-100">
-                  Más vendido
-                </span>
+        <div className="mt-6 grid gap-4 md:grid-cols-2">
+          {/* Paquete 1 */}
+          <div
+            className={cn(
+              "card-neo p-6",
+              selected === 1 && "ring-1 ring-cyan-300/40 shadow-[0_0_32px_rgba(34,211,238,0.10)]"
+            )}
+          >
+            <div className="flex items-start justify-between gap-3">
+              <div>
+                <div className="text-xs text-white/60">PAQUETE #1</div>
+                <div className="mt-1 text-lg font-black">{PACKAGE_1_NAME}</div>
               </div>
-              <div className="mt-1 text-lg font-black">{PACKAGE_2_NAME}</div>
+              <button
+                type="button"
+                className={cn("select-pill", selected === 1 && "select-pill-active")}
+                onClick={() => onSelect(1)}
+              >
+                {selected === 1 ? "Seleccionado" : "Seleccionar"}
+              </button>
             </div>
-            <button
-              type="button"
-              className={cn("select-pill", selected === 2 && "select-pill-active")}
-              onClick={() => onSelect(2)}
-            >
-              {selected === 2 ? "Seleccionado" : "Seleccionar"}
+
+            <div className="mt-4 flex items-end gap-3">
+              <div className="text-3xl font-black">{formatCOP(PRICE_1_NOW)}</div>
+              <div className="text-sm text-white/60 line-through">{formatCOP(PRICE_1_OLD)}</div>
+              <div className="ml-auto text-xs text-white/60">COP</div>
+            </div>
+
+            <div className="mt-4 grid gap-2 text-sm text-white/75">
+              {p1Bullets.map((b) => (
+                <div key={b} className="flex gap-2"><Check /> {b}</div>
+              ))}
+            </div>
+
+            <button onClick={onGoPay} className="btn-primary mt-6 w-full">
+              ¡Quiero el Paquete #1!
             </button>
+            <div className="mt-3 text-center text-xs text-white/60">Te lleva a Métodos de pago ↓</div>
           </div>
 
-          <div className="mt-4 flex items-end gap-3">
-            <div className="text-3xl font-black">{formatCOP(PRICE_2_NOW)}</div>
-            <div className="text-sm text-white/60 line-through">{formatCOP(PRICE_2_OLD)}</div>
-            <div className="ml-auto text-xs text-white/60">COP</div>
-          </div>
+          {/* Paquete 2 */}
+          <div
+            className={cn(
+              "card-neo p-6",
+              "border-fuchsia-400/30 bg-fuchsia-500/10",
+              selected === 2 && "ring-1 ring-fuchsia-300/50 shadow-[0_0_44px_rgba(232,121,249,0.14)]"
+            )}
+          >
+            <div className="flex items-start justify-between gap-3">
+              <div>
+                <div className="flex items-center gap-2">
+                  <div className="text-xs text-white/60">PAQUETE #2</div>
+                  <span className="rounded-full bg-fuchsia-400/15 px-2 py-0.5 text-[11px] font-semibold text-fuchsia-100">
+                    Más vendido
+                  </span>
+                </div>
+                <div className="mt-1 text-lg font-black">{PACKAGE_2_NAME}</div>
+              </div>
+              <button
+                type="button"
+                className={cn("select-pill", selected === 2 && "select-pill-active")}
+                onClick={() => onSelect(2)}
+              >
+                {selected === 2 ? "Seleccionado" : "Seleccionar"}
+              </button>
+            </div>
 
-          <div className="mt-4 grid gap-2 text-sm text-white/75">
-            {p2Bullets.map((b) => (
-              <div key={b} className="flex gap-2"><Spark /> {b}</div>
-            ))}
-          </div>
+            <div className="mt-4 flex items-end gap-3">
+              <div className="text-3xl font-black">{formatCOP(PRICE_2_NOW)}</div>
+              <div className="text-sm text-white/60 line-through">{formatCOP(PRICE_2_OLD)}</div>
+              <div className="ml-auto text-xs text-white/60">COP</div>
+            </div>
 
-          <button onClick={onGoPay} className="btn-primary mt-6 w-full">
-            ¡Quiero el Paquete #2!
-          </button>
-          <div className="mt-3 text-center text-xs text-white/60">Te lleva a Métodos de pago ↓</div>
+            <div className="mt-4 grid gap-2 text-sm text-white/75">
+              {p2Bullets.map((b) => (
+                <div key={b} className="flex gap-2"><Spark /> {b}</div>
+              ))}
+            </div>
+
+            <button onClick={onGoPay} className="btn-primary mt-6 w-full">
+              ¡Quiero el Paquete #2!
+            </button>
+            <div className="mt-3 text-center text-xs text-white/60">Te lleva a Métodos de pago ↓</div>
+          </div>
         </div>
-      </div>
 
-      <Separator />
-    </section>
+        <Separator />
+      </section>
+    </div>
   );
 }
 
