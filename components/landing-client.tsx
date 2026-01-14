@@ -149,17 +149,7 @@ export default function LandingClient() {
           <div className="card-neo p-5 md:p-6">
             <div className="space-y-4">
               <h2 className="text-2xl font-black tracking-tight md:text-3xl">Conócelo en 90 segundos</h2>
-              <p className="text-sm leading-relaxed text-white/70">
-                Más de 1500 estudiantes ya lo adquirieron. Mira cómo funciona y por qué es tan completo.
-              </p>
 
-              <ul className="space-y-2 text-sm text-white/75">
-                {heroVideoBullets.map((b) => (
-                  <li key={b} className="flex gap-2">
-                    <Spark /> <span>{b}</span>
-                  </li>
-                ))}
-              </ul>
             </div>
 
             <div className="mt-5">
@@ -316,11 +306,13 @@ function Hero({
   rightContent?: React.ReactNode;
 }) {
   return (
-    <section className="relative mx-auto max-w-6xl px-5 pt-16 pb-10 md:pt-20" aria-label="Hero">
+    <section className="relative mx-auto max-w-6xl px-5 pt-8 pb-10 md:pt-12" aria-label="Hero">
       <div className={cn("grid gap-10 md:items-center", rightContent ? "md:grid-cols-2" : undefined)}>
         <div className="space-y-6">
           <div className="flex flex-wrap items-center gap-2">
-            <Badge>ICFES 2026</Badge>
+            <span className="inline-flex items-center rounded-full border border-orange-400/30 bg-orange-400/10 px-3 py-1 text-xs font-semibold tracking-wide text-orange-300">
+            ÚNICO PAGO
+            </span>
             <Badge variant="cyan">Actualizaciones semanales</Badge>
             <Badge variant="emerald">Acceso permanente</Badge>
           </div>
@@ -378,27 +370,7 @@ function Hero({
   );
 }
 
-/* ======================================================
-   TRUST BAR
-====================================================== */
 
-function TrustBar() {
-  return (
-    <section className="mx-auto max-w-6xl px-5 pb-10">
-      <div className="rounded-2xl border border-white/10 bg-white/5 px-5 py-4">
-        <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
-          <div className="text-sm font-semibold">Más de <span className="text-white">1500 estudiantes</span> ya lo adquirieron</div>
-          <div className="flex flex-wrap gap-2 text-xs text-white/70">
-            <Chip>Único pago</Chip>
-            <Chip>Acceso permanente</Chip>
-            <Chip>Actualizaciones semanales</Chip>
-            <Chip>Entrega inmediata por WhatsApp</Chip>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
 
 /* ======================================================
    VIDEO SECTION
@@ -484,6 +456,28 @@ function VideoSection({
                 </div>
               </div>
             )}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ======================================================
+   TRUST BAR
+====================================================== */
+
+function TrustBar() {
+  return (
+    <section className="mx-auto max-w-6xl px-5 pb-10">
+      <div className="rounded-2xl border border-white/10 bg-white/5 px-5 py-4">
+        <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
+          <div className="text-sm font-semibold">Más de <span className="text-white">1500 estudiantes</span> ya lo adquirieron</div>
+          <div className="flex flex-wrap gap-2 text-xs text-white/70">
+            <Chip>Único pago</Chip>
+            <Chip>Acceso permanente</Chip>
+            <Chip>Actualizaciones semanales</Chip>
+            <Chip>Entrega inmediata por WhatsApp</Chip>
           </div>
         </div>
       </div>
