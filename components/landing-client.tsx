@@ -39,7 +39,7 @@ const DEADLINE_ISO = "2026-03-15T23:59:59-05:00"; // America/Bogota
 const MINI_TEST_DRIVE_LINK = ""; // 🔗 pega aquí el link directo al Drive del mini test
 
 // Videos (ideal: YouTube no listado para mejor performance)
-const VIDEO_PRESENTATION_URL = ""; // 🔗 embed (YouTube) o Drive embed
+const VIDEO_PRESENTATION_URL = "https://www.youtube.com/embed/2uAdALhOnAA"; // 🔗 embed (YouTube) o Drive embed
 const VIDEO_WALKTHROUGH_URL = ""; // 🔗 embed (YouTube) o Drive embed
 
 // Assets (opcionales) – puedes usar /public/... luego
@@ -63,13 +63,13 @@ const TESTIMONIALS: Array<{
 
 // Ejemplos por materia (imágenes listas según dijiste)
 const SUBJECT_EXAMPLES: Array<{ key: string; label: string; img: string; alt: string }> = [
-  { key: "mate", label: "Matemáticas", img: "", alt: "Ejemplo Matemáticas" },
-  { key: "sociales", label: "Sociales", img: "", alt: "Ejemplo Sociales" },
-  { key: "lectura", label: "Lectura Crítica", img: "", alt: "Ejemplo Lectura" },
-  { key: "bio", label: "Biología", img: "", alt: "Ejemplo Biología" },
-  { key: "quim", label: "Química", img: "", alt: "Ejemplo Química" },
-  { key: "fis", label: "Física", img: "", alt: "Ejemplo Física" },
-  { key: "ing", label: "Inglés", img: "", alt: "Ejemplo Inglés" },
+  { key: "mate", label: "Matemáticas", img: "preguntas-ejemplo/ejemplomatematicas.png", alt: "Ejemplo Matemáticas" },
+  { key: "sociales", label: "Sociales", img: "preguntas-ejemplo/ejemplosociales.png", alt: "Ejemplo Sociales" },
+  { key: "lectura", label: "Lectura Crítica", img: "preguntas-ejemplo/ejemplolectura.png", alt: "Ejemplo Lectura" },
+  { key: "bio", label: "Biología", img: "preguntas-ejemplo/ejemplobiologia.png", alt: "Ejemplo Biología" },
+  { key: "quim", label: "Química", img: "preguntas-ejemplo/ejemploquimica.png", alt: "Ejemplo Química" },
+  { key: "fis", label: "Física", img: "preguntas-ejemplo/ejemplofisica.png", alt: "Ejemplo Física" },
+  { key: "ing", label: "Inglés", img: "preguntas-ejemplo/ejemploingles.png", alt: "Ejemplo Inglés" },
 ];
 
 /* ======================================================
@@ -129,6 +129,12 @@ export default function LandingClient() {
     [PACKAGE_2_NAME, makeWaLink]
   );
 
+  const heroVideoBullets = [
+    "Único pago · Acceso permanente",
+    "Actualizaciones semanales",
+    "Material real y organizado para subir puntaje",
+  ];
+
   return (
     <main className="min-h-screen bg-neutral-950 text-neutral-50 selection:bg-fuchsia-400/30 selection:text-white">
       <NeonBackground />
@@ -139,24 +145,50 @@ export default function LandingClient() {
         onViewPackages={() => scrollToId("packages")}
         onMiniTest={() => scrollToId("mini-test")}
         waLink={waGeneral}
+        rightContent={
+          <div className="card-neo p-5 md:p-6">
+            <div className="space-y-4">
+              <h2 className="text-2xl font-black tracking-tight md:text-3xl">Conócelo en 90 segundos</h2>
+              <p className="text-sm leading-relaxed text-white/70">
+                Más de 1500 estudiantes ya lo adquirieron. Mira cómo funciona y por qué es tan completo.
+              </p>
+
+              <ul className="space-y-2 text-sm text-white/75">
+                {heroVideoBullets.map((b) => (
+                  <li key={b} className="flex gap-2">
+                    <Spark /> <span>{b}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div className="mt-5">
+              <div className="aspect-[3/4] w-full max-h-[520px] md:max-h-[560px] overflow-hidden rounded-2xl border border-white/10 bg-white/5">
+                {VIDEO_PRESENTATION_URL ? (
+                  <iframe
+                    className="h-full w-full"
+                    src={VIDEO_PRESENTATION_URL}
+                    title="Video presentación"
+                    loading="lazy"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowFullScreen
+                  />
+                ) : (
+                  <div className="grid h-full place-items-center px-6 text-center text-xs text-white/60">
+                    <div>
+                      <div className="font-semibold text-white">Pega aquí tu embed URL</div>
+                      <div className="mt-1">Edita VIDEO_PRESENTATION_URL.</div>
+                      <div className="mt-3">Recomendado: YouTube no listado (embed).</div>
+                    </div>
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+        }
       />
 
       <TrustBar />
-
-      <VideoSection
-        id="video-presentacion"
-        eyebrow="VIDEO PRESENTACIÓN"
-        title="Conócelo en 90 segundos"
-        subtitle="Más de 1500 estudiantes ya lo adquirieron. Mira cómo funciona y por qué es tan completo."
-        embedUrl={VIDEO_PRESENTATION_URL}
-        bullets={[
-          "Único pago · Acceso permanente",
-          "Actualizaciones semanales",
-          "Material real y organizado para subir puntaje",
-        ]}
-        primary={{ label: "Ver Paquetes", onClick: () => scrollToId("packages") }}
-        secondary={{ label: "Hablar por WhatsApp", href: waGeneral }}
-      />
 
       <TestimonialsSection />
 
@@ -276,14 +308,16 @@ function Hero({
   onViewPackages,
   onMiniTest,
   waLink,
+  rightContent,
 }: {
   onViewPackages: () => void;
   onMiniTest: () => void;
   waLink: string;
+  rightContent?: React.ReactNode;
 }) {
   return (
     <section className="relative mx-auto max-w-6xl px-5 pt-16 pb-10 md:pt-20" aria-label="Hero">
-      <div className="grid gap-10 md:grid-cols-2 md:items-center">
+      <div className={cn("grid gap-10 md:items-center", rightContent && "md:grid-cols-2")}>
         <div className="space-y-6">
           <div className="flex flex-wrap items-center gap-2">
             <Badge>ICFES 2026</Badge>
@@ -333,63 +367,12 @@ function Hero({
           </div>
         </div>
 
-        <div className="relative">
-          <div className="card-neo p-5 md:p-6">
-            <div className="flex items-center justify-between">
-              <div>
-                <div className="text-xs text-white/60">PROMO ACTUAL</div>
-                <div className="mt-1 text-lg font-bold">2 opciones · Pago único</div>
-              </div>
-              <div className="text-xs text-white/60">COP</div>
-            </div>
-
-            <div className="mt-5 grid gap-3">
-              <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
-                <div className="flex items-center justify-between">
-                  <div className="text-sm font-semibold">Paquete #1</div>
-                  <span className="text-xs text-white/60 line-through">{formatCOP(PRICE_1_OLD)}</span>
-                </div>
-                <div className="mt-1 text-2xl font-black">{formatCOP(PRICE_1_NOW)}</div>
-                <div className="mt-2 text-xs text-white/70">Material completo (2017–2025) + formularios automáticos</div>
-              </div>
-
-              <div className="rounded-2xl border border-fuchsia-400/30 bg-fuchsia-500/10 p-4 shadow-[0_0_0_1px_rgba(232,121,249,0.25),0_0_36px_rgba(232,121,249,0.08)]">
-                <div className="flex items-center justify-between">
-                  <div className="text-sm font-semibold">Paquete #2</div>
-                  <span className="rounded-full bg-fuchsia-400/15 px-2 py-0.5 text-[11px] font-semibold text-fuchsia-200">
-                    Más vendido
-                  </span>
-                </div>
-                <div className="mt-1 flex items-end gap-2">
-                  <div className="text-2xl font-black">{formatCOP(PRICE_2_NOW)}</div>
-                  <div className="text-xs text-white/60 line-through">{formatCOP(PRICE_2_OLD)}</div>
-                </div>
-                <div className="mt-2 text-xs text-white/70">Todo el material + Plan de Estudio Personalizado</div>
-              </div>
-            </div>
-
-            <div className="mt-5">
-              {HERO_IMAGE ? (
-                // eslint-disable-next-line @next/next/no-img-element
-                <img
-                  src={HERO_IMAGE}
-                  alt="Vista del material (hero)"
-                  className="w-full rounded-2xl border border-white/10 bg-white/5 object-cover"
-                  loading="lazy"
-                />
-              ) : (
-                <div className="grid h-44 place-items-center rounded-2xl border border-white/10 bg-white/5 text-center text-xs text-white/60">
-                  <div className="px-6">
-                    <div className="font-semibold text-white">(Opcional) Imagen/Mockup del material</div>
-                    <div className="mt-1">Pega una imagen en HERO_IMAGE para que esto se vea brutal.</div>
-                  </div>
-                </div>
-              )}
-            </div>
+        {rightContent ? (
+          <div className="relative">
+            {rightContent}
+            <div className="pointer-events-none absolute -inset-4 -z-10 rounded-[28px] bg-[radial-gradient(circle_at_top,rgba(34,211,238,0.12),transparent_55%)]" />
           </div>
-
-          <div className="pointer-events-none absolute -inset-4 -z-10 rounded-[28px] bg-[radial-gradient(circle_at_top,rgba(34,211,238,0.12),transparent_55%)]" />
-        </div>
+        ) : null}
       </div>
     </section>
   );
