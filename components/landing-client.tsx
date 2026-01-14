@@ -136,7 +136,7 @@ export default function LandingClient() {
   ];
 
   return (
-    <main className="min-h-screen bg-neutral-950 text-neutral-50 selection:bg-fuchsia-400/30 selection:text-white">
+    <main className="relative min-h-[100svh] overflow-x-hidden bg-neutral-950 text-neutral-50 selection:bg-fuchsia-400/30 selection:text-white">
       <NeonBackground />
 
       <TopBar waLink={waGeneral} />
@@ -252,9 +252,9 @@ function NeonBackground() {
   return (
     <div aria-hidden className="pointer-events-none fixed inset-0 -z-10 overflow-hidden">
       {/* Orbes difuminados */}
-      <div className="absolute -top-24 left-1/2 h-[520px] w-[520px] -translate-x-1/2 rounded-full bg-fuchsia-500/20 blur-[90px]" />
-      <div className="absolute top-[30%] -left-24 h-[520px] w-[520px] rounded-full bg-cyan-400/15 blur-[110px]" />
-      <div className="absolute bottom-[-140px] right-[-120px] h-[560px] w-[560px] rounded-full bg-emerald-400/15 blur-[120px]" />
+      <div className="absolute -top-24 left-1/2 h-[520px] w-[520px] max-h-[100vh] max-w-[100vw] -translate-x-1/2 rounded-full bg-fuchsia-500/20 blur-[90px]" />
+      <div className="absolute top-[30%] -left-24 h-[520px] w-[520px] max-h-[100vh] max-w-[100vw] rounded-full bg-cyan-400/15 blur-[110px]" />
+      <div className="absolute bottom-[-140px] right-[-120px] h-[560px] w-[560px] max-h-[100vh] max-w-[100vw] rounded-full bg-emerald-400/15 blur-[120px]" />
 
       {/* Grid sutil */}
       <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.05)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.05)_1px,transparent_1px)] bg-[size:28px_28px] opacity-[0.12]" />
