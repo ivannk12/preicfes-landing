@@ -317,7 +317,7 @@ function Hero({
 }) {
   return (
     <section className="relative mx-auto max-w-6xl px-5 pt-16 pb-10 md:pt-20" aria-label="Hero">
-      <div className={cn("grid gap-10 md:items-center", rightContent && "md:grid-cols-2")}>
+      <div className={cn("grid gap-10 md:items-center", rightContent ? "md:grid-cols-2" : undefined)}>
         <div className="space-y-6">
           <div className="flex flex-wrap items-center gap-2">
             <Badge>ICFES 2026</Badge>
