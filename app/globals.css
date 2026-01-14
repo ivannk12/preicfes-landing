@@ -19,10 +19,12 @@
   }
 }
 
-html,
-body {
-  background-color: #0a0a0a;
-  overscroll-behavior-y: none;
+@layer base {
+  html,
+  body {
+    @apply h-full bg-neutral-950;
+    overscroll-behavior: none;
+  }
 }
 
 body {
