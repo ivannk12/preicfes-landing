@@ -306,7 +306,7 @@ function Hero({
   rightContent?: React.ReactNode;
 }) {
   return (
-    <section className="relative mx-auto max-w-6xl px-5 pt-8 pb-10 md:pt-12" aria-label="Hero">
+    <section className="relative mx-auto max-w-6xl px-5 pt-8 pb-10 md:pt-12 bg-glow bg-glow-hero" aria-label="Hero">
       <div className={cn("grid gap-10 md:items-center", rightContent ? "md:grid-cols-2" : undefined)}>
         <div className="space-y-6">
           <div className="flex flex-wrap items-center gap-2">
@@ -396,7 +396,7 @@ function VideoSection({
   secondary?: { label: string; onClick?: () => void; href?: string };
 }) {
   return (
-    <section id={id} className="mx-auto max-w-6xl px-5 py-10 md:py-14">
+    <section id={id} className="mx-auto max-w-6xl px-5 py-10 md:py-14 bg-glow bg-glow-video">
       <div className="grid gap-6 md:grid-cols-2 md:items-center">
         <div className="space-y-4">
           <div className="text-xs font-semibold tracking-widest text-white/60">{eyebrow}</div>
@@ -498,7 +498,7 @@ function TestimonialsSection() {
   }, [tab, TESTIMONIALS]);
 
   return (
-    <section className="mx-auto max-w-6xl px-5 py-10 md:py-14" aria-label="Testimonios">
+    <section className="mx-auto max-w-6xl px-5 py-10 md:py-14 bg-glow bg-glow-proof" aria-label="Testimonios">
       <div className="flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
         <div>
           <div className="text-xs font-semibold tracking-widest text-white/60">PRUEBA SOCIAL</div>
@@ -865,7 +865,7 @@ function PackagesSection({
   ];
 
   return (
-    <section id="packages" className="mx-auto max-w-6xl px-5 py-10 md:py-14" aria-label="Paquetes">
+    <section id="packages" className="mx-auto max-w-6xl px-5 py-10 md:py-14 bg-glow bg-glow-packages" aria-label="Paquetes">
       <div className="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
         <div>
           <div className="text-xs font-semibold tracking-widest text-white/60">OFERTAS</div>

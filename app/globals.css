@@ -20,15 +20,95 @@
 }
 
 @layer base {
+  :root,
   html,
   body {
-    @apply h-full bg-neutral-950;
+    height: 100%;
+    background: #05060a;
+  }
+
+  html,
+  body {
     overscroll-behavior: none;
+  }
+
+  body {
+    min-height: 100svh;
+  }
+
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: -1;
+    background:
+      radial-gradient(1200px 700px at 15% 8%, rgba(56, 189, 248, 0.14), transparent 60%),
+      radial-gradient(1000px 700px at 85% 12%, rgba(99, 102, 241, 0.12), transparent 58%),
+      radial-gradient(900px 700px at 50% 92%, rgba(34, 211, 238, 0.08), transparent 60%),
+      linear-gradient(180deg, #05060a 0%, #02030a 100%);
   }
 }
 
 body {
-  background: #0a0a0a;
+  background: #05060a;
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+@layer utilities {
+  .bg-glow {
+    position: relative;
+    z-index: 0;
+  }
+
+  .bg-glow::before {
+    content: "";
+    position: absolute;
+    inset: -1px;
+    z-index: -1;
+    pointer-events: none;
+    opacity: 1;
+  }
+
+  .bg-glow-hero::before {
+    background:
+      radial-gradient(1000px 600px at 10% 10%, rgba(56, 189, 248, 0.18), transparent 60%),
+      radial-gradient(800px 600px at 80% 20%, rgba(99, 102, 241, 0.14), transparent 62%),
+      linear-gradient(180deg, rgba(255, 255, 255, 0.02), transparent 22%);
+  }
+
+  .bg-glow-video::before {
+    background:
+      radial-gradient(900px 550px at 70% 15%, rgba(34, 211, 238, 0.14), transparent 60%),
+      linear-gradient(180deg, rgba(56, 189, 248, 0.06), transparent 26%);
+  }
+
+  .bg-glow-packages::before {
+    background:
+      radial-gradient(900px 600px at 20% 20%, rgba(52, 211, 153, 0.1), transparent 60%),
+      radial-gradient(900px 600px at 85% 35%, rgba(56, 189, 248, 0.08), transparent 60%),
+      linear-gradient(180deg, rgba(255, 255, 255, 0.02), transparent 28%);
+  }
+
+  .bg-glow-proof::before {
+    background:
+      radial-gradient(900px 600px at 60% 10%, rgba(168, 85, 247, 0.12), transparent 60%),
+      radial-gradient(800px 600px at 20% 60%, rgba(56, 189, 248, 0.07), transparent 62%);
+  }
+
+  .bg-divider-soft {
+    position: relative;
+  }
+
+  .bg-divider-soft::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -1px;
+    height: 64px;
+    pointer-events: none;
+    background: linear-gradient(180deg, transparent, rgba(5, 6, 10, 0.95));
+  }
 }
