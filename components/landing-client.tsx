@@ -44,7 +44,7 @@ const VIDEO_WALKTHROUGH_URL = ""; // 🔗 embed (YouTube) o Drive embed
 
 // Assets (opcionales) – puedes usar /public/... luego
 const HERO_IMAGE = ""; // ej: "/hero.png" o "https://..."
-const TRANSFORMATION_IMAGE = ""; // ej: "/transform.png" o "https://..."
+const TRANSFORMATION_IMAGE = "transformacion.jpg"; // ej: "/transform.png" o "https://..."
 
 // Testimonios (placeholders): reemplaza por imágenes tuyas
 const TESTIMONIALS: Array<{
@@ -201,8 +201,7 @@ export default function LandingClient() {
           "+80 formularios con calificación automática",
           "Simulacros y respuestas explicadas",
         ]}
-        primary={{ label: "Quiero ver ofertas", onClick: () => scrollToId("packages") }}
-        secondary={{ label: "Abrir Mini Test Gratis", onClick: () => scrollToId("mini-test") }}
+        primary={{ label: "⚡️ Quiero ver las ofertas", onClick: () => scrollToId("packages") }}
       />
 
       <ExamplesAccordion />
@@ -447,11 +446,12 @@ function TestimonialsSection() {
       <section className="mx-auto max-w-6xl px-5 py-10 md:py-14" aria-label="Testimonios">
         <div className="flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
           <div>
+            <div className="text-xs font-semibold tracking-widest text-white/60">METODO COMPROBADO</div>
             <h2 className="mt-2 text-2xl font-black tracking-tight md:text-3xl">
-              🤩 Resultados y Testimonios
+              🎓🤩 Resultados y Testimonios
             </h2>
             <p className="mt-2 text-sm text-white/70">
-              Si todos ellos pudieron tu tambíen, sacar más de 400 es algo normal para los que estudian con el material
+              Si todos ellos pudieron... ¡TU TAMBIÉN!, sacar más de 400 es algo normal para los que se preparan con nuestro material 
             </p>
           </div>
 
@@ -671,45 +671,43 @@ function PersonalPlanSection({ onViewP2 }: { onViewP2: () => void }) {
 
   return (
     <section className="mx-auto max-w-6xl px-5 py-10 md:py-14" aria-label="Plan personalizado">
-      <div className="card-neo p-6 md:p-8">
-        <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
-          <div>
-            <div className="inline-flex items-center gap-2 rounded-full border border-fuchsia-400/30 bg-fuchsia-500/10 px-3 py-1 text-xs font-semibold text-fuchsia-200">
-              <span className="h-2 w-2 rounded-full bg-fuchsia-300 shadow-[0_0_18px_rgba(232,121,249,0.7)]" />
-              Incluido en Paquete #2
-            </div>
-            <h2 className="mt-3 text-2xl font-black tracking-tight md:text-3xl">
-              Plan de Estudio Personalizado
-            </h2>
-            <p className="mt-2 text-sm leading-relaxed text-white/70">
-              El diferencial #1: harás únicamente los mejores cuadernillos y el orden correcto según tu objetivo.
-            </p>
+      <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
+        <div>
+          <div className="inline-flex items-center gap-2 rounded-full border border-fuchsia-400/30 bg-fuchsia-500/10 px-3 py-1 text-xs font-semibold text-fuchsia-200">
+            <span className="h-2 w-2 rounded-full bg-fuchsia-300 shadow-[0_0_18px_rgba(232,121,249,0.7)]" />
+            Incluido en Paquete #2
           </div>
-
-          <button onClick={onViewP2} className="btn-primary">
-            Ver Paquete #2 (Más vendido)
-          </button>
+          <h2 className="mt-3 text-2xl font-black tracking-tight md:text-3xl">
+            Plan de Estudio Personalizado
+          </h2>
+          <p className="mt-2 text-sm leading-relaxed text-white/70">
+            El diferencial #1: harás únicamente los mejores cuadernillos y el orden correcto según tu objetivo.
+          </p>
         </div>
 
-        <div className="mt-6 grid gap-4 md:grid-cols-2">
-          <div className="rounded-2xl border border-white/10 bg-white/5 p-5">
-            <div className="text-sm font-bold">¿Qué recibes?</div>
-            <ul className="mt-3 space-y-2 text-sm text-white/75">
-              <li className="flex gap-2"><Check /> Cronograma a tu ritmo</li>
-              <li className="flex gap-2"><Check /> Priorización por materias</li>
-              <li className="flex gap-2"><Check /> Ruta clara: qué hacer cada día</li>
-              <li className="flex gap-2"><Check /> Entrega en pocas horas por WhatsApp</li>
-            </ul>
-          </div>
+        <button onClick={onViewP2} className="btn-primary">
+          Ver Paquete #2 (Más vendido)
+        </button>
+      </div>
 
-          <div className="rounded-2xl border border-white/10 bg-white/5 p-5">
-            <div className="text-sm font-bold">Beneficios directos</div>
-            <ul className="mt-3 space-y-2 text-sm text-white/75">
-              {benefits.map((b) => (
-                <li key={b} className="flex gap-2"><Spark /> {b}</li>
-              ))}
-            </ul>
-          </div>
+      <div className="mt-6 grid gap-4 md:grid-cols-2">
+        <div className="rounded-2xl border border-white/10 bg-white/5 p-5">
+          <div className="text-sm font-bold">¿Qué recibes?</div>
+          <ul className="mt-3 space-y-2 text-sm text-white/75">
+            <li className="flex gap-2"><Check /> Cronograma a tu ritmo</li>
+            <li className="flex gap-2"><Check /> Priorización por materias</li>
+            <li className="flex gap-2"><Check /> Ruta clara: qué hacer cada día</li>
+            <li className="flex gap-2"><Check /> Entrega en pocas horas por WhatsApp</li>
+          </ul>
+        </div>
+
+        <div className="rounded-2xl border border-white/10 bg-white/5 p-5">
+          <div className="text-sm font-bold">Beneficios directos</div>
+          <ul className="mt-3 space-y-2 text-sm text-white/75">
+            {benefits.map((b) => (
+              <li key={b} className="flex gap-2"><Spark /> {b}</li>
+            ))}
+          </ul>
         </div>
       </div>
     </section>
@@ -722,21 +720,31 @@ function PersonalPlanSection({ onViewP2 }: { onViewP2: () => void }) {
 
 function ExamplesAccordion() {
   const [open, setOpen] = useState<string>(SUBJECT_EXAMPLES[0]?.key ?? "mate");
+  const activeClassByKey: Record<string, string> = {
+    mate: "border-rose-400/40 bg-rose-500/10 shadow-[0_0_0_1px_rgba(248,113,113,0.2)]",
+    sociales: "border-orange-400/40 bg-orange-500/10 shadow-[0_0_0_1px_rgba(251,146,60,0.2)]",
+    lectura: "border-fuchsia-400/40 bg-fuchsia-500/10 shadow-[0_0_0_1px_rgba(232,121,249,0.2)]",
+    bio: "border-lime-400/40 bg-lime-500/10 shadow-[0_0_0_1px_rgba(163,230,53,0.2)]",
+    quim: "border-sky-400/40 bg-sky-500/10 shadow-[0_0_0_1px_rgba(56,189,248,0.2)]",
+    fis: "border-zinc-400/40 bg-zinc-500/10 shadow-[0_0_0_1px_rgba(161,161,170,0.2)]",
+    ing: "border-yellow-400/40 bg-yellow-500/10 shadow-[0_0_0_1px_rgba(250,204,21,0.2)]",
+  };
 
   return (
     <section className="mx-auto max-w-6xl px-5 py-10 md:py-14" aria-label="Ejemplos">
       <div>
         <div className="text-xs font-semibold tracking-widest text-white/60">EJEMPLOS REALES</div>
         <h2 className="mt-2 text-2xl font-black tracking-tight md:text-3xl">
-          Así se ven las preguntas y explicaciones
+          💥 Ejemplos de Pregunta Material ICFES Supremo
         </h2>
-        <p className="mt-2 text-sm text-white/70">
-          Abre una materia y mira un ejemplo real (pregunta + explicación). Reemplaza las imágenes cuando quieras.
-        </p>
       </div>
 
       <div className="mt-6 grid gap-4 md:grid-cols-2">
         <div className="space-y-2">
+          <p className="mb-2 text-sm text-white/70">
+            En cada simulacro que resuelvas tendrás las preguntas más recientes a color, con respuesta explicada paso a paso y formularios
+            de google con calificación automática
+          </p>
           {SUBJECT_EXAMPLES.map((s) => (
             <button
               key={s.key}
@@ -744,7 +752,7 @@ function ExamplesAccordion() {
               className={cn(
                 "w-full rounded-2xl border px-4 py-4 text-left transition",
                 open === s.key
-                  ? "border-fuchsia-400/40 bg-fuchsia-500/10 shadow-[0_0_0_1px_rgba(232,121,249,0.20)]"
+                  ? activeClassByKey[s.key] ?? "border-white/20 bg-white/5"
                   : "border-white/10 bg-white/5 hover:bg-white/7"
               )}
             >
@@ -756,13 +764,13 @@ function ExamplesAccordion() {
           ))}
         </div>
 
-        <div className="card-neo overflow-hidden p-0">
+        <div className="card-neo h-full overflow-hidden p-0">
           {(() => {
             const item = SUBJECT_EXAMPLES.find((x) => x.key === open);
             if (!item) return null;
             return item.img ? (
               // eslint-disable-next-line @next/next/no-img-element
-              <img src={item.img} alt={item.alt} className="w-full object-cover" loading="lazy" />
+              <img src={item.img} alt={item.alt} className="h-full w-full object-cover" loading="lazy" />
             ) : (
               <div className="grid aspect-[4/3] place-items-center bg-white/5 px-8 text-center text-xs text-white/60">
                 <div>
@@ -1091,75 +1099,71 @@ function MiniTestSection() {
   ];
 
   return (
-    <section id="mini-test" className="mx-auto max-w-6xl px-5 py-10 md:py-14" aria-label="Mini test">
-      <div className="card-neo p-6 md:p-8">
-        <div className="flex flex-col gap-6">
-          <div className="max-w-2xl">
-            <div className="text-xs font-semibold tracking-widest text-white/60">DIAGNÓSTICO GRATUITO</div>
-            <h2 className="mt-2 text-2xl font-black tracking-tight md:text-3xl">
-              ¿Cuánto sacarías si presentaras el ICFES hoy?
-            </h2>
+    <section id="mini-test" className="mx-auto max-w-6xl px-5 py-6 md:py-10" aria-label="Mini test">
+      <div className="flex flex-col gap-6">
+        <div className="max-w-2xl">
+          <div className="text-xs font-semibold tracking-widest text-white/60">¿CUANTO SACARÍAS SI PRESENTARAS EL ICFES HOY?</div>
+          <h2 className="mt-2 text-2xl font-black tracking-tight md:text-3xl">
+            📙 MINI TEST DIAGNÓSTICO GRATUITO
+          </h2>
+        </div>
+
+        <div className="grid gap-6 md:grid-cols-2 md:items-start">
+          <div className="order-1 md:order-none md:col-start-2">
+            <p className="text-sm text-white/70">
+              Accede <b className="text-white"> GRATIS y de INMEDIATO </b> a <b className="text-white">25 preguntas reales</b> del último ICFES. <br /><br />
+              ¡Podrás experimentar de primera mano la <b className="text-white">calidad del Material Completo! </b>
+              Tendrás las <b className="text-white">respuestas explicadas paso a paso</b> y un formulario de google con
+              <b className="text-white"> calificación automática</b> para que conozcas tu nivel actual en cada materia antes de empezar a prepararte.
+            </p>
           </div>
 
-          <div className="grid gap-6 md:grid-cols-2 md:items-start">
-            <div className="order-1 md:order-none md:col-start-2">
-              <p className="text-sm text-white/70">
-                Mini test GRATIS con <b className="text-white">25 preguntas reales</b> del último ICFES.
-                Incluye <b className="text-white">respuestas explicadas paso a paso</b> y formulario con
-                <b className="text-white"> calificación automática</b> (como los simulacros del material completo).
-              </p>
-              <div className="mt-4 flex flex-wrap gap-2 text-xs text-white/70">
-                <Chip>Valor real gratis</Chip>
-                <Chip>Confianza</Chip>
-                <Chip>Muestra de calidad</Chip>
-              </div>
-            </div>
-
-            <div className="order-2 md:order-none md:col-start-2">
-              <div className="mt-2 grid grid-cols-3 gap-2">
-                {miniTestCards.map((card) => (
-                  <div key={card.title} className="rounded-2xl border border-white/10 bg-white/5 p-2">
-                    <div className="text-[10px] font-semibold tracking-widest text-white/70">{card.title}</div>
-                    <div className="mt-2 aspect-[3/4] w-full rounded-xl border border-white/10 bg-neutral-950/40">
-                      {card.img ? (
-                        // eslint-disable-next-line @next/next/no-img-element
-                        <img
-                          src={card.img}
-                          alt={card.title}
-                          className="h-full w-full object-cover"
-                          loading="lazy"
-                        />
-                      ) : (
-                        <div className="grid h-full place-items-center text-xs text-white/40">
-                          Pega aquí la imagen
-                        </div>
-                      )}
-                    </div>
+          <div className="order-2 md:order-none md:col-start-2">
+            <div className="mt-2 grid grid-cols-3 gap-2">
+              {miniTestCards.map((card) => (
+                <div key={card.title} className="rounded-2xl border border-white/10 bg-white/5 p-2">
+                  <div className="text-center text-[10px] font-semibold tracking-widest text-white/70">{card.title}</div>
+                  <div className="mt-2 aspect-[3/4] w-full rounded-xl border border-white/10 bg-neutral-950/40">
+                    {card.img ? (
+                      // eslint-disable-next-line @next/next/no-img-element
+                      <img
+                        src={card.img}
+                        alt={card.title}
+                        className="h-full w-full object-cover"
+                        loading="lazy"
+                      />
+                    ) : (
+                      <div className="grid h-full place-items-center text-xs text-white/40">
+                        Pega aquí la imagen
+                      </div>
+                    )}
                   </div>
-                ))}
-              </div>
+                </div>
+              ))}
             </div>
+          </div>
 
-            <div className="order-3 md:order-none md:col-start-1 md:row-start-1 md:row-span-3 md:self-start">
+          <div className="order-3 md:order-none md:col-start-1 md:row-start-1 md:row-span-3 md:self-stretch">
+            <div className="flex h-full items-center justify-center">
               <img
                 src="/minitest/minitest.png"
                 alt="Mini test diagnóstico"
-                className="mx-auto w-2/3 md:w-3/4 object-contain"
+                className="mx-auto w-2/3 md:w-full object-contain"
                 loading="lazy"
               />
             </div>
+          </div>
 
-            <div className="order-4 md:order-none md:col-start-2">
-              <div className="grid gap-3">
-                <a
-                  href={MINI_TEST_DRIVE_LINK || "#"}
-                  className={cn("btn-primary", !MINI_TEST_DRIVE_LINK && "opacity-70 pointer-events-none")}
-                >
-                  Abrir Mini Test Gratis
-                </a>
-                <div className="text-xs text-white/60">
-                  {MINI_TEST_DRIVE_LINK ? "Abre el Drive directo" : "Pega el link en MINI_TEST_DRIVE_LINK"}
-                </div>
+          <div className="order-4 md:order-none md:col-start-2">
+            <div className="grid gap-3">
+              <a
+                href={MINI_TEST_DRIVE_LINK || "#"}
+                className={cn("btn-primary", !MINI_TEST_DRIVE_LINK && "opacity-70 pointer-events-none")}
+              >
+                Abrir Mini Test Gratis
+              </a>
+              <div className="text-xs text-white/60">
+                {MINI_TEST_DRIVE_LINK ? "👉 Te lleva al drive inmediatamente" : "Pega el link en MINI_TEST_DRIVE_LINK"}
               </div>
             </div>
           </div>
@@ -1254,92 +1258,90 @@ function PaymentsSection({
 
   return (
     <section id="payments" className="mx-auto max-w-6xl px-5 py-12 md:py-16" aria-label="Métodos de pago">
-      <div className="card-neo p-6 md:p-8">
-        <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
-          <div>
-            <div className="text-xs font-semibold tracking-widest text-white/60">MÉTODOS DE PAGO</div>
-            <h2 className="mt-2 text-2xl font-black tracking-tight md:text-3xl">Paga y recibe el acceso por WhatsApp</h2>
-            <p className="mt-2 text-sm text-white/70">
-              Elige tu paquete, paga por transferencia o link, y envía el comprobante. Te damos acceso inmediato al Drive.
-            </p>
-          </div>
-        </div>
-
-        <div className="mt-6 grid gap-4 md:grid-cols-2">
-          <div className="rounded-2xl border border-white/10 bg-white/5 p-5">
-            <div className="text-sm font-bold">Paso 1 — Elige tu paquete</div>
-            <div className="mt-4 grid gap-2">
-              <button
-                className={cn("select-row", selected === 1 && "select-row-active")}
-                onClick={() => setSelected(1)}
-              >
-                <div>
-                  <div className="text-sm font-semibold">Paquete #1</div>
-                  <div className="text-xs text-white/60">{formatCOP(PRICE_1_NOW)} COP</div>
-                </div>
-                <span className="text-xs text-white/60">{selected === 1 ? "✓" : ""}</span>
-              </button>
-
-              <button
-                className={cn("select-row", selected === 2 && "select-row-active")}
-                onClick={() => setSelected(2)}
-              >
-                <div>
-                  <div className="flex items-center gap-2">
-                    <div className="text-sm font-semibold">Paquete #2</div>
-                    <span className="rounded-full bg-fuchsia-400/15 px-2 py-0.5 text-[11px] font-semibold text-fuchsia-100">Más vendido</span>
-                  </div>
-                  <div className="text-xs text-white/60">{formatCOP(PRICE_2_NOW)} COP</div>
-                </div>
-                <span className="text-xs text-white/60">{selected === 2 ? "✓" : ""}</span>
-              </button>
-            </div>
-          </div>
-
-          <div className="rounded-2xl border border-white/10 bg-white/5 p-5">
-            <div className="text-sm font-bold">Paso 2 — Paga por tu método</div>
-
-            <div className="mt-4 grid gap-3">
-              <div className="rounded-2xl border border-white/10 bg-neutral-950/40 p-4">
-                <div className="text-xs font-semibold text-white/70">Transferencia (recomendado)</div>
-                <div className="mt-2 grid gap-2 text-sm">
-                  <CopyRow label="Nequi" value={NEQUI_NUMBER} note={ACCOUNT_HOLDER} />
-                  <CopyRow label={BANK_NAME} value={BANCOLOMBIA_ACCOUNT} note={ACCOUNT_HOLDER} />
-                </div>
-              </div>
-
-              <div className="rounded-2xl border border-white/10 bg-neutral-950/40 p-4">
-                <div className="text-xs font-semibold text-white/70">Link de pago (PSE / tarjeta)</div>
-                <a
-                  href={wompiLink || "#"}
-                  className={cn("btn-secondary w-full text-center", !wompiLink && "opacity-70 pointer-events-none")}
-                >
-                  {wompiLink ? "Pagar con link (Wompi)" : "Pega WOMPI_LINK_P1 / WOMPI_LINK_P2"}
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div className="mt-6 rounded-2xl border border-white/10 bg-white/5 p-5">
-          <div className="text-sm font-bold">Paso 3 — Envía el comprobante y recibe el acceso</div>
+      <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+        <div>
+          <div className="text-xs font-semibold tracking-widest text-white/60">MÉTODOS DE PAGO</div>
+          <h2 className="mt-2 text-2xl font-black tracking-tight md:text-3xl">Paga y recibe el acceso por WhatsApp</h2>
           <p className="mt-2 text-sm text-white/70">
-            Cuando pagues, envía el comprobante por WhatsApp y te damos acceso inmediato al Drive. Si compras el Paquete #2,
-            te pedimos los datos del plan y se envía en pocas horas por el mismo WhatsApp.
+            Elige tu paquete, paga por transferencia o link, y envía el comprobante. Te damos acceso inmediato al Drive.
           </p>
+        </div>
+      </div>
 
-          <div className="mt-4 flex flex-col gap-3 sm:flex-row">
-            <a href={proofLink} className="btn-primary">
-              Enviar comprobante por WhatsApp
-            </a>
-            <a href={makeWaLink(WHATSAPP_BASE_MESSAGE)} className="btn-secondary">
-              Hacer una pregunta
-            </a>
-          </div>
+      <div className="mt-6 grid gap-4 md:grid-cols-2">
+        <div className="rounded-2xl border border-white/10 bg-white/5 p-5">
+          <div className="text-sm font-bold">Paso 1 — Elige tu paquete</div>
+          <div className="mt-4 grid gap-2">
+            <button
+              className={cn("select-row", selected === 1 && "select-row-active")}
+              onClick={() => setSelected(1)}
+            >
+              <div>
+                <div className="text-sm font-semibold">Paquete #1</div>
+                <div className="text-xs text-white/60">{formatCOP(PRICE_1_NOW)} COP</div>
+              </div>
+              <span className="text-xs text-white/60">{selected === 1 ? "✓" : ""}</span>
+            </button>
 
-          <div className="mt-3 text-xs text-white/60">
-            Tip: puedes fijar el chat para que el cliente vea instrucciones y reciba el Drive ahí mismo.
+            <button
+              className={cn("select-row", selected === 2 && "select-row-active")}
+              onClick={() => setSelected(2)}
+            >
+              <div>
+                <div className="flex items-center gap-2">
+                  <div className="text-sm font-semibold">Paquete #2</div>
+                  <span className="rounded-full bg-fuchsia-400/15 px-2 py-0.5 text-[11px] font-semibold text-fuchsia-100">Más vendido</span>
+                </div>
+                <div className="text-xs text-white/60">{formatCOP(PRICE_2_NOW)} COP</div>
+              </div>
+              <span className="text-xs text-white/60">{selected === 2 ? "✓" : ""}</span>
+            </button>
           </div>
+        </div>
+
+        <div className="rounded-2xl border border-white/10 bg-white/5 p-5">
+          <div className="text-sm font-bold">Paso 2 — Paga por tu método</div>
+
+          <div className="mt-4 grid gap-3">
+            <div className="rounded-2xl border border-white/10 bg-neutral-950/40 p-4">
+              <div className="text-xs font-semibold text-white/70">Transferencia (recomendado)</div>
+              <div className="mt-2 grid gap-2 text-sm">
+                <CopyRow label="Nequi" value={NEQUI_NUMBER} note={ACCOUNT_HOLDER} />
+                <CopyRow label={BANK_NAME} value={BANCOLOMBIA_ACCOUNT} note={ACCOUNT_HOLDER} />
+              </div>
+            </div>
+
+            <div className="rounded-2xl border border-white/10 bg-neutral-950/40 p-4">
+              <div className="text-xs font-semibold text-white/70">Link de pago (PSE / tarjeta)</div>
+              <a
+                href={wompiLink || "#"}
+                className={cn("btn-secondary w-full text-center", !wompiLink && "opacity-70 pointer-events-none")}
+              >
+                {wompiLink ? "Pagar con link (Wompi)" : "Pega WOMPI_LINK_P1 / WOMPI_LINK_P2"}
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="mt-6 rounded-2xl border border-white/10 bg-white/5 p-5">
+        <div className="text-sm font-bold">Paso 3 — Envía el comprobante y recibe el acceso</div>
+        <p className="mt-2 text-sm text-white/70">
+          Cuando pagues, envía el comprobante por WhatsApp y te damos acceso inmediato al Drive. Si compras el Paquete #2,
+          te pedimos los datos del plan y se envía en pocas horas por el mismo WhatsApp.
+        </p>
+
+        <div className="mt-4 flex flex-col gap-3 sm:flex-row">
+          <a href={proofLink} className="btn-primary">
+            Enviar comprobante por WhatsApp
+          </a>
+          <a href={makeWaLink(WHATSAPP_BASE_MESSAGE)} className="btn-secondary">
+            Hacer una pregunta
+          </a>
+        </div>
+
+        <div className="mt-3 text-xs text-white/60">
+          Tip: puedes fijar el chat para que el cliente vea instrucciones y reciba el Drive ahí mismo.
         </div>
       </div>
     </section>
