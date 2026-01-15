@@ -36,7 +36,7 @@ const ACCOUNT_HOLDER = "Iván Gómez";
 const DEADLINE_ISO = "2026-03-15T23:59:59-05:00"; // America/Bogota
 
 // Mini test gratuito (Drive directo)
-const MINI_TEST_DRIVE_LINK = ""; // 🔗 pega aquí el link directo al Drive del mini test
+const MINI_TEST_DRIVE_LINK = "https://drive.google.com/drive/folders/17WRXPAIuOKi0PkE0pkpLfy4asH-mJIVV?usp=drive_link"; // 🔗 pega aquí el link directo al Drive del mini test
 
 // Videos (ideal: YouTube no listado para mejor performance)
 const VIDEO_PRESENTATION_URL = "https://www.youtube.com/embed/2uAdALhOnAA"; // 🔗 embed (YouTube) o Drive embed
@@ -143,9 +143,11 @@ export default function LandingClient() {
         waLink={waGeneral}
         rightContent={
           <div className="card-neo p-5 md:p-6">
-            <div className="space-y-4">
-              <h2 className="text-2xl font-black tracking-tight md:text-3xl">Conócelo en 90 segundos</h2>
-
+            <div className="space-y-2">
+              <h2 className="text-2xl font-black tracking-tight md:text-3xl">
+                🏆📚 ¡Más de 1500 estudiantes ya lo adquirieron!
+              </h2>
+              <p className="text-sm text-white/70">Descubre el motivo:</p>
             </div>
 
             <div className="mt-5">
@@ -174,7 +176,6 @@ export default function LandingClient() {
         }
       />
 
-      <TrustBar />
 
       <TestimonialsSection />
 
@@ -282,7 +283,7 @@ function Hero({
 
             <p className="text-base leading-relaxed text-white/75 md:text-lg">
               ¿Te imaginas tener en tu bolsillo todo el material que necesitas para un puntaje alto en el ICFES
-              con un <span className="text-white">Plan de Estudio Personalizado</span> a tu ritmo?
+              con un <span className="text-white">Plan de Estudio Personalizado</span> a tu ritmo? 🚀
             </p>
 
             <ul className="space-y-2 text-sm text-white/80">
@@ -429,24 +430,6 @@ function VideoSection({
    TRUST BAR
 ====================================================== */
 
-function TrustBar() {
-  return (
-    <section className="mx-auto max-w-6xl px-5 pb-10">
-      <div className="rounded-2xl border border-white/10 bg-white/5 px-5 py-4">
-        <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
-          <div className="text-sm font-semibold">Más de <span className="text-white">1500 estudiantes</span> ya lo adquirieron</div>
-          <div className="flex flex-wrap gap-2 text-xs text-white/70">
-            <Chip>Único pago</Chip>
-            <Chip>Acceso permanente</Chip>
-            <Chip>Actualizaciones semanales</Chip>
-            <Chip>Entrega inmediata por WhatsApp</Chip>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
 /* ======================================================
    TESTIMONIALS (arriba de transformación ✅)
 ====================================================== */
@@ -464,12 +447,11 @@ function TestimonialsSection() {
       <section className="mx-auto max-w-6xl px-5 py-10 md:py-14" aria-label="Testimonios">
         <div className="flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
           <div>
-            <div className="text-xs font-semibold tracking-widest text-white/60">PRUEBA SOCIAL</div>
             <h2 className="mt-2 text-2xl font-black tracking-tight md:text-3xl">
-              Resultados y chats reales
+              🤩 Resultados y Testimonios
             </h2>
             <p className="mt-2 text-sm text-white/70">
-              Reemplaza estos placeholders por tus capturas (puntajes y chats). No hace falta texto largo.
+              Si todos ellos pudieron tu tambíen, sacar más de 400 es algo normal para los que estudian con el material
             </p>
           </div>
 
@@ -1102,36 +1084,83 @@ function FitSection() {
 ====================================================== */
 
 function MiniTestSection() {
+  const miniTestCards = [
+    { title: "25 Preguntas Reales", img: "/minitest/portada.jpeg" },
+    { title: "Formulario de Google", img: "/minitest/formulario.jpeg" },
+    { title: "Respuestas explicadas", img: "/minitest/respuestas.jpeg" },
+  ];
+
   return (
     <section id="mini-test" className="mx-auto max-w-6xl px-5 py-10 md:py-14" aria-label="Mini test">
       <div className="card-neo p-6 md:p-8">
-        <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
+        <div className="flex flex-col gap-6">
           <div className="max-w-2xl">
             <div className="text-xs font-semibold tracking-widest text-white/60">DIAGNÓSTICO GRATUITO</div>
             <h2 className="mt-2 text-2xl font-black tracking-tight md:text-3xl">
               ¿Cuánto sacarías si presentaras el ICFES hoy?
             </h2>
-            <p className="mt-2 text-sm text-white/70">
-              Mini test GRATIS con <b className="text-white">25 preguntas reales</b> del último ICFES.
-              Incluye <b className="text-white">respuestas explicadas paso a paso</b> y formulario con
-              <b className="text-white"> calificación automática</b> (como los simulacros del material completo).
-            </p>
-            <div className="mt-4 flex flex-wrap gap-2 text-xs text-white/70">
-              <Chip>Valor real gratis</Chip>
-              <Chip>Confianza</Chip>
-              <Chip>Muestra de calidad</Chip>
-            </div>
           </div>
 
-          <div className="grid gap-3">
-            <a
-              href={MINI_TEST_DRIVE_LINK || "#"}
-              className={cn("btn-primary", !MINI_TEST_DRIVE_LINK && "opacity-70 pointer-events-none")}
-            >
-              Abrir Mini Test Gratis
-            </a>
-            <div className="text-xs text-white/60">
-              {MINI_TEST_DRIVE_LINK ? "Abre el Drive directo" : "Pega el link en MINI_TEST_DRIVE_LINK"}
+          <div className="grid gap-6 md:grid-cols-2 md:items-start">
+            <div className="order-1 md:order-none md:col-start-2">
+              <p className="text-sm text-white/70">
+                Mini test GRATIS con <b className="text-white">25 preguntas reales</b> del último ICFES.
+                Incluye <b className="text-white">respuestas explicadas paso a paso</b> y formulario con
+                <b className="text-white"> calificación automática</b> (como los simulacros del material completo).
+              </p>
+              <div className="mt-4 flex flex-wrap gap-2 text-xs text-white/70">
+                <Chip>Valor real gratis</Chip>
+                <Chip>Confianza</Chip>
+                <Chip>Muestra de calidad</Chip>
+              </div>
+            </div>
+
+            <div className="order-2 md:order-none md:col-start-2">
+              <div className="mt-2 grid grid-cols-3 gap-2">
+                {miniTestCards.map((card) => (
+                  <div key={card.title} className="rounded-2xl border border-white/10 bg-white/5 p-2">
+                    <div className="text-[10px] font-semibold tracking-widest text-white/70">{card.title}</div>
+                    <div className="mt-2 aspect-[3/4] w-full rounded-xl border border-white/10 bg-neutral-950/40">
+                      {card.img ? (
+                        // eslint-disable-next-line @next/next/no-img-element
+                        <img
+                          src={card.img}
+                          alt={card.title}
+                          className="h-full w-full object-cover"
+                          loading="lazy"
+                        />
+                      ) : (
+                        <div className="grid h-full place-items-center text-xs text-white/40">
+                          Pega aquí la imagen
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="order-3 md:order-none md:col-start-1 md:row-start-1 md:row-span-3 md:self-start">
+              <img
+                src="/minitest/minitest.png"
+                alt="Mini test diagnóstico"
+                className="mx-auto w-2/3 md:w-3/4 object-contain"
+                loading="lazy"
+              />
+            </div>
+
+            <div className="order-4 md:order-none md:col-start-2">
+              <div className="grid gap-3">
+                <a
+                  href={MINI_TEST_DRIVE_LINK || "#"}
+                  className={cn("btn-primary", !MINI_TEST_DRIVE_LINK && "opacity-70 pointer-events-none")}
+                >
+                  Abrir Mini Test Gratis
+                </a>
+                <div className="text-xs text-white/60">
+                  {MINI_TEST_DRIVE_LINK ? "Abre el Drive directo" : "Pega el link en MINI_TEST_DRIVE_LINK"}
+                </div>
+              </div>
             </div>
           </div>
         </div>
