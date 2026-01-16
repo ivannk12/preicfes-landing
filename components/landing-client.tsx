@@ -31,6 +31,7 @@ const NEQUI_NUMBER = "3168695397";
 const BANK_NAME = "Bancolombia";
 const BANCOLOMBIA_ACCOUNT = "75675989958";
 const ACCOUNT_HOLDER = "Iván Gómez";
+const LLAVE = "TuLlaveAquí";
 
 // Deadline del contador (15 marzo 2026)
 const DEADLINE_ISO = "2026-03-15T23:59:59-05:00"; // America/Bogota
@@ -52,14 +53,56 @@ const TESTIMONIALS: Array<{
   type: "puntaje" | "chat";
   img: string;
   alt: string;
+  name?: string;
+  quote?: string;
   caption?: string;
-}> = Array.from({ length: 10 }).map((_, i) => ({
-  id: `t-${i + 1}`,
-  type: i < 5 ? "puntaje" : "chat",
-  img: "", // 🔁 pega URL o /public/...
-  alt: `Testimonio ${i + 1}`,
-  caption: i < 5 ? "Resultado / puntaje (placeholder)" : "Chat (placeholder)",
-}));
+}> = [
+  {
+    id: "p-1",
+    type: "puntaje",
+    img: "/Testimonios/Puntajes/zuluaga.jpg",
+    alt: "Puntaje Miguel Zuluaga",
+    name: "Miguel Zuluaga",
+    quote: "\"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.\"",
+  },
+  {
+    id: "p-2",
+    type: "puntaje",
+    img: "/Testimonios/Puntajes/Nicolas Ramirez.png",
+    alt: "Puntaje Nicolas Ramirez",
+    name: "Nicolas Ramirez",
+    quote: "\"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.\"",
+  },
+  {
+    id: "p-3",
+    type: "puntaje",
+    img: "/Testimonios/Puntajes/ujueta.jpg",
+    alt: "Puntaje Juan Esteban",
+    name: "Juan Manuel Ujueta",
+    quote: "\"El ICFES no es un examen, es una experiencia unica en la vida que se deberia vivir acompañada de los mejores y con un material de estudio tan valioso como este es posible disfrutarla al maximo\"",
+  },
+  {
+    id: "p-4",
+    type: "puntaje",
+    img: "/Testimonios/Puntajes/mariana.jpg",
+    alt: "Puntaje Mariana Londoño",
+    name: "Mariana Londoño Castaño",
+    quote: "\"“El material me ayudó a conseguir un puntaje que ni yo misma me esperaba, de verdad que se me repitieron un montón de preguntas y no puedo estar más agradecida”.\"",
+  },
+  {
+    id: "p-5",
+    type: "puntaje",
+    img: "/Testimonios/Puntajes/paula.jpg",
+    alt: "Puntaje Maria Paula",
+    name: "Maria Paula Osso",
+    quote: "\"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.\"",
+  },
+  { id: "c-1", type: "chat", img: "/Testimonios/Chats/chat1.jpg", alt: "Chat testimonio 1" },
+  { id: "c-2", type: "chat", img: "/Testimonios/Chats/chat2.jpg", alt: "Chat testimonio 2" },
+  { id: "c-3", type: "chat", img: "/Testimonios/Chats/chat3.jpg", alt: "Chat testimonio 3" },
+  { id: "c-4", type: "chat", img: "/Testimonios/Chats/chat4.jpg", alt: "Chat testimonio 4" },
+  { id: "c-5", type: "chat", img: "/Testimonios/Chats/chat5.jpg", alt: "Chat testimonio 5" },
+];
 
 // Ejemplos por materia (imágenes listas según dijiste)
 const SUBJECT_EXAMPLES: Array<{ key: string; label: string; img: string; alt: string }> = [
@@ -179,16 +222,22 @@ export default function LandingClient() {
 
       <TestimonialsSection />
 
-      <TransformationSection />
+      <div className="bg-glow bg-glow-transform">
+        <TransformationSection />
+      </div>
 
-      <IncludesSection />
+      <div className="bg-glow bg-glow-access">
+        <IncludesSection />
+      </div>
 
-      <PersonalPlanSection
-        onViewP2={() => {
-          setSelectedPackage(2);
-          scrollToId("packages");
-        }}
-      />
+      <div className="bg-glow bg-glow-plan">
+        <PersonalPlanSection
+          onViewP2={() => {
+            setSelectedPackage(2);
+            scrollToId("packages");
+          }}
+        />
+      </div>
 
       {/* <VideoSection
         id="video-recorrido"
@@ -218,15 +267,15 @@ export default function LandingClient() {
 
       <FitSection />
 
-      <MiniTestSection />
+      <div className="bg-glow bg-glow-mini">
+        <MiniTestSection />
+      </div>
 
       <FAQSection />
 
       <PaymentsSection
         selected={selectedPackage}
         setSelected={setSelectedPackage}
-        wompiP1={WOMPI_LINK_P1}
-        wompiP2={WOMPI_LINK_P2}
         waProofP1={waProofP1}
         waProofP2={waProofP2}
       />
@@ -506,7 +555,10 @@ function HorizontalGallery({
                 <img
                   src={t.img}
                   alt={t.alt}
-                  className="h-44 w-full object-cover"
+                  className={cn(
+                    "w-full object-contain bg-neutral-950/40",
+                    t.type === "chat" ? "max-h-72" : "max-h-56"
+                  )}
                   loading="lazy"
                 />
               ) : (
@@ -514,7 +566,16 @@ function HorizontalGallery({
                   Pega aquí imagen del testimonio
                 </div>
               )}
-              <div className="p-4 text-xs text-white/70">{t.caption ?? ""}</div>
+              <div className="p-4 text-xs text-white/70">
+                {t.type === "puntaje" ? (
+                  <div className="space-y-2">
+                    <div className="text-sm font-semibold text-white">{t.name ?? "Nombre Apellido"}</div>
+                    <p>{t.quote ?? "\"Lorem ipsum dolor sit amet, consectetur adipiscing elit.\""}"</p>
+                  </div>
+                ) : (
+                  t.caption ?? ""
+                )}
+              </div>
             </div>
           </div>
         ))}
@@ -611,45 +672,148 @@ function TransformationSection() {
 
 function IncludesSection() {
   const items = [
-    { title: "Cuadernillos oficiales 2017–2025", desc: "Los mejores y más recientes, organizados para que avances con estrategia." },
-    { title: "Respuestas explicadas paso a paso", desc: "No solo es la respuesta: entiendes el porqué para no volver a fallar." },
-    { title: "+80 formularios automáticos", desc: "Calificación inmediata para medir progreso real (como los simulacros)." },
-    { title: "Simulacros VIP", desc: "Práctica tipo examen para subir rendimiento bajo presión." },
-    { title: "Compilados por materia", desc: "Matemáticas, Lectura, Sociales, Biología, Química, Física e Inglés." },
-    { title: "Clases grabadas + temarios", desc: "Refuerzo rápido cuando un tema se te dificulta." },
-    { title: "Acceso permanente", desc: "Pago único, sin mensualidades. Tu material queda para siempre." },
-    { title: "Actualizaciones semanales", desc: "El material se mantiene vivo y actualizado con el tiempo." },
+    {
+      title: "📘 Preguntas Reales 2017 - 2025  CALENDARIO A Y B",
+      desc: "Las mejores y más recientes en todas sus versiones, organizadas para que el día de la prueba llegues con lo mejor en tu cabeza",
+      images: [
+        "/material/preguntas/pregunta1.png",
+        "/material/preguntas/pregunta2.png",
+        "/material/preguntas/pregunta3.png",
+      ],
+    },
+    {
+      title: "✏️ Respuestas explicadas paso a paso",
+      desc: "Todas las semanas estamos trabajando en darle respuesta explicada paso a paso a cada pregunta nueva que sale, garantizando comprensión absoluta de cada posible pregunta, incluyendo el tema del que trata la pregunta y su dificultad",
+      images: [
+        "/material/respuestas/respuesta1.png",
+        "/material/respuestas/respuesta2.png",
+        "/material/respuestas/respuesta3.png",
+      ],
+    },
+    {
+      title: "📊 +80 Formularios de Google con calificación automática",
+      desc: "En cada simulacro podrás marcar y enviar tus respuestas en los Google Forms para recibir tu puntaje de inmediato, sabrás cuantas preguntas buenas y malas tuviste",
+      images: [
+        "/material/formularios/formulario1.png",
+        "/material/formularios/formulario2.png",
+        "/material/formularios/formulario3.png",
+      ],
+    },
+    {
+      title: "📓 Tips y Temarios actualizados de todas las áreas",
+      desc: "+300 Slides y archivos con explicaciones y tips de los temas que salen en el ICFES de cada materia",
+      images: [
+        "/material/tips/tips1.png",
+        "/material/tips/tips2.png",
+        "/material/tips/tips3.png",
+      ],
+    },
+    {
+      title: "🏆 Simulacros VIP",
+      desc: "Últimas 3000 preguntas que ha sacado el ICFES organizadas con sus respuestas explicadas y formularios. En tu Plan de Estudio Personalizado podrás escoger cuantas hacer por día, hay de sobra y siempre vamos agregando preguntas nuevas",
+      images: ["/material/simulacros/simulacro1.png", "/material/simulacros/simulacro2.png"],
+    },
+    {
+      title: "⚡️ Compilados VIP",
+      desc: "12 Compilados por Materia con +150 preguntas seleccionadas por cada una de las cinco materias del ICFES",
+      images: [
+        "/material/compilados/compilado1.png",
+        "/material/compilados/compilado2.png",
+        "/material/compilados/compilado3.png",
+      ],
+    },
+    {
+      title: "🎥 Clases Grabadas",
+      desc: "Tendrás acceso a más de 200 clases grabadas ya subidas en el material tanto prácticas y teóricas, 3 lives en tik tok semanales siguen actualizandolas",
+      images: ["/material/clases/clase1.png", "/material/clases/clase2.png", "/material/clases/clase3.png"],
+    },
+    {
+      title: "📘📗 Material PreUNAL y PreUDEA",
+      desc: "+800 archivos de preparación para los examenes de la Universidad Nacional y la Universidad de Antioquia",
+      images: ["/material/preunal/unal1.png", "/material/preunal/unal2.png", "/material/preunal/unal3.png"],
+    },
   ];
 
   return (
     <section className="mx-auto max-w-6xl px-5 py-10 md:py-14" aria-label="Qué incluye">
-      <div className="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
+      <div className="flex flex-col gap-3">
         <div>
-          <div className="text-xs font-semibold tracking-widest text-white/60">QUÉ INCLUYE</div>
+          <div className="text-xs font-semibold tracking-widest text-white/60">
+            TODA LA PREPARACIÓN DISPONIBLE 24/7 PARA TI EN TU BOLSILLO 💻📱
+          </div>
           <h2 className="mt-2 text-2xl font-black tracking-tight md:text-3xl">
-            Todo lo que necesitas en un solo lugar
+            🤔 ¿A que tendrás acceso?
           </h2>
-          <p className="mt-2 text-sm text-white/70">
-            La idea es simple: menos caos, más práctica real, y un sistema que te acompaña hasta el día del ICFES.
-          </p>
         </div>
-        <div className="text-xs text-white/60">Pago único · Entrega por WhatsApp · Drive organizado</div>
       </div>
 
-      <div className="mt-6 grid gap-4 md:grid-cols-2">
-        {items.map((it) => (
-          <div key={it.title} className="card-neo p-5">
-            <div className="flex items-start gap-3">
-              <div className="mt-1 grid h-9 w-9 place-items-center rounded-xl border border-white/10 bg-white/5">
-                <Spark />
-              </div>
-              <div>
-                <h3 className="font-bold">{it.title}</h3>
-                <p className="mt-1 text-sm text-white/70">{it.desc}</p>
-              </div>
-            </div>
+      <div className="mt-6 grid gap-6 md:grid-cols-[1fr_1.25fr] md:items-start">
+        <div>
+          <p className="text-sm text-white/70">
+            La idea es simple, tendrás un material digital que podrás abrir todos los días a cualquier hora y en cualquier lugar.
+            Esto te permite la máxima flexibilidad y calidad para que estudies todo el tiempo que desees y nunca te canses.
+          </p>
+          <div className="mt-3 flex flex-wrap gap-2 text-xs text-white/80">
+            <span className="rounded-full border border-emerald-400/30 bg-emerald-500/10 px-3 py-1">
+              ✅ Único pago - sin mensualidades
+            </span>
+            <span className="rounded-full border border-sky-400/30 bg-sky-500/10 px-3 py-1">
+              🗂️ Entrega en Google Drive
+            </span>
+            <span className="rounded-full border border-amber-400/30 bg-amber-500/10 px-3 py-1">
+              🔒 Acceso permanente
+            </span>
+            <span className="rounded-full border border-fuchsia-400/30 bg-fuchsia-500/10 px-3 py-1">
+              🚀 Actualizaciones semanales
+            </span>
           </div>
-        ))}
+          <div className="mt-4 rounded-3xl border border-white/10 bg-white/5 p-4">
+            <img
+              src="/material/biblioteca.png"
+              alt="Biblioteca virtual PreICFES Material"
+              className="h-full w-full rounded-2xl object-cover"
+              loading="lazy"
+            />
+          </div>
+        </div>
+
+        <div className="space-y-3">
+          <div className="text-xs text-white/50">Haz click para conocer el contenido</div>
+          {items.map((it) => (
+            <details
+              key={it.title}
+              className="rounded-2xl border border-white/10 bg-neutral-950/70 p-4 transition open:border-cyan-300/40 open:bg-neutral-950/90 open:shadow-[0_0_0_1px_rgba(34,211,238,0.35)]"
+            >
+              <summary className="cursor-pointer list-none">
+                <div className="flex items-center gap-3">
+                  <div className="grid h-9 w-9 place-items-center rounded-xl border border-white/10 bg-white/5">
+                    <Spark />
+                  </div>
+                  <div className="font-semibold">{it.title}</div>
+                  <span className="ml-auto text-white/60">
+                    <svg aria-hidden viewBox="0 0 20 20" className="h-4 w-4">
+                      <path d="M5 7l5 6 5-6" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+                    </svg>
+                  </span>
+                </div>
+              </summary>
+              <div className="mt-3 text-sm text-white/70">{it.desc}</div>
+              <div className="mt-3 grid grid-cols-3 gap-2">
+                {it.images.length > 0 ? (
+                  it.images.map((img) => (
+                    <div key={img} className="overflow-hidden rounded-xl border border-white/10 bg-neutral-950/40">
+                      <img src={img} alt={it.title} className="h-full w-full object-cover" loading="lazy" />
+                    </div>
+                  ))
+                ) : (
+                  <div className="grid h-20 place-items-center rounded-xl border border-white/10 bg-neutral-950/40 text-xs text-white/40 sm:col-span-3">
+                    Pega aquí las imágenes del desplegable
+                  </div>
+                )}
+              </div>
+            </details>
+          ))}
+        </div>
       </div>
 
       <Separator />
@@ -1343,7 +1507,7 @@ function FAQSection() {
         <div>
           <div className="text-xs font-semibold tracking-widest text-white/60">FAQ</div>
           <h2 className="mt-2 text-2xl font-black tracking-tight md:text-3xl">Preguntas frecuentes</h2>
-          <p className="mt-2 text-sm text-white/70">Yo puse unas base. Tú las cambias por las reales que te preguntan.</p>
+          <p className="mt-2 text-sm text-white/70">Si tienes alguna otra duda distinta puedes hablarnos al Whatsapp</p>
         </div>
       </div>
 
@@ -1373,90 +1537,79 @@ function FAQSection() {
 function PaymentsSection({
   selected,
   setSelected,
-  wompiP1,
-  wompiP2,
   waProofP1,
   waProofP2,
 }: {
   selected: 1 | 2;
   setSelected: (v: 1 | 2) => void;
-  wompiP1: string;
-  wompiP2: string;
   waProofP1: string;
   waProofP2: string;
 }) {
   const proofLink = selected === 1 ? waProofP1 : waProofP2;
-  const wompiLink = selected === 1 ? wompiP1 : wompiP2;
 
   return (
-    <section id="payments" className="mx-auto max-w-6xl px-5 py-12 md:py-16" aria-label="Métodos de pago">
+    <div className="bg-glow bg-glow-payments">
+      <section id="payments" className="mx-auto max-w-6xl px-5 py-12 md:py-16" aria-label="Métodos de pago">
       <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
         <div>
-          <div className="text-xs font-semibold tracking-widest text-white/60">MÉTODOS DE PAGO</div>
-          <h2 className="mt-2 text-2xl font-black tracking-tight md:text-3xl">Paga y recibe el acceso por WhatsApp</h2>
+          <div className="text-xs font-semibold tracking-widest text-white/60">PAGA Y RECIBE EL ACCESO POR WHATSAPP 📲</div>
+          <h2 className="mt-2 text-2xl font-black tracking-tight md:text-3xl">⚡️ MÉTODOS DE PAGO</h2>
           <p className="mt-2 text-sm text-white/70">
-            Elige tu paquete, paga por transferencia o link, y envía el comprobante. Te damos acceso inmediato al Drive.
+            Elige tu paquete, paga por transferencia, y envíanos el comprobante. Te damos acceso inmediato al Drive.
           </p>
         </div>
       </div>
 
       <div className="mt-6 grid gap-4 md:grid-cols-2">
-        <div className="rounded-2xl border border-white/10 bg-white/5 p-5">
+        <div className="rounded-2xl border border-emerald-400/20 bg-emerald-500/5 p-5">
           <div className="text-sm font-bold">Paso 1 — Elige tu paquete</div>
-          <div className="mt-4 grid gap-2">
+          <div className="mt-4 grid gap-3 md:grid-cols-2">
             <button
-              className={cn("select-row", selected === 1 && "select-row-active")}
+              className={cn(
+                "rounded-2xl border border-white/10 bg-white/5 p-4 text-left transition",
+                selected === 1 && "border-emerald-300 bg-emerald-500/20 shadow-[0_0_0_2px_rgba(52,211,153,0.35)]"
+              )}
               onClick={() => setSelected(1)}
             >
-              <div>
-                <div className="text-sm font-semibold">Paquete #1</div>
-                <div className="text-xs text-white/60">{formatCOP(PRICE_1_NOW)} COP</div>
-              </div>
-              <span className="text-xs text-white/60">{selected === 1 ? "✓" : ""}</span>
+              <div className="text-sm font-semibold">1, 📚 MATERIAL DE ESTUDIO SUPREMO</div>
+              <div className="mt-2 text-xs text-white/60 line-through">{formatCOP(PRICE_1_OLD)} COP</div>
+              <div className="mt-1 text-sm font-semibold text-white">{formatCOP(PRICE_1_NOW)} COP</div>
             </button>
 
             <button
-              className={cn("select-row", selected === 2 && "select-row-active")}
+              className={cn(
+                "rounded-2xl border border-white/10 bg-white/5 p-4 text-left transition",
+                selected === 2 && "border-amber-300 bg-amber-500/20 shadow-[0_0_0_2px_rgba(251,191,36,0.35)]"
+              )}
               onClick={() => setSelected(2)}
             >
-              <div>
-                <div className="flex items-center gap-2">
-                  <div className="text-sm font-semibold">Paquete #2</div>
-                  <span className="rounded-full bg-fuchsia-400/15 px-2 py-0.5 text-[11px] font-semibold text-fuchsia-100">Más vendido</span>
-                </div>
-                <div className="text-xs text-white/60">{formatCOP(PRICE_2_NOW)} COP</div>
+              <div className="flex items-center gap-2">
+                <div className="text-sm font-semibold">2, 🏆 🎓MATERIAL DE ESTUDIO SUPREMO + PLAN DE ESTUDIO PERSONALIZADO</div>
+                <span className="rounded-full bg-amber-400/15 px-2 py-0.5 text-[11px] font-semibold text-amber-100">Más vendido</span>
               </div>
-              <span className="text-xs text-white/60">{selected === 2 ? "✓" : ""}</span>
+              <div className="mt-2 text-xs text-white/60 line-through">{formatCOP(PRICE_2_OLD)} COP</div>
+              <div className="mt-1 text-sm font-semibold text-white">{formatCOP(PRICE_2_NOW)} COP</div>
             </button>
           </div>
         </div>
 
-        <div className="rounded-2xl border border-white/10 bg-white/5 p-5">
+        <div className="rounded-2xl border border-sky-400/20 bg-sky-500/5 p-5">
           <div className="text-sm font-bold">Paso 2 — Paga por tu método</div>
 
           <div className="mt-4 grid gap-3">
             <div className="rounded-2xl border border-white/10 bg-neutral-950/40 p-4">
-              <div className="text-xs font-semibold text-white/70">Transferencia (recomendado)</div>
+              <div className="text-xs font-semibold text-white/70">Transferencia</div>
               <div className="mt-2 grid gap-2 text-sm">
                 <CopyRow label="Nequi" value={NEQUI_NUMBER} note={ACCOUNT_HOLDER} />
                 <CopyRow label={BANK_NAME} value={BANCOLOMBIA_ACCOUNT} note={ACCOUNT_HOLDER} />
+                <CopyRow label="Llave" value={LLAVE} note={ACCOUNT_HOLDER} />
               </div>
-            </div>
-
-            <div className="rounded-2xl border border-white/10 bg-neutral-950/40 p-4">
-              <div className="text-xs font-semibold text-white/70">Link de pago (PSE / tarjeta)</div>
-              <a
-                href={wompiLink || "#"}
-                className={cn("btn-secondary w-full text-center", !wompiLink && "opacity-70 pointer-events-none")}
-              >
-                {wompiLink ? "Pagar con link (Wompi)" : "Pega WOMPI_LINK_P1 / WOMPI_LINK_P2"}
-              </a>
             </div>
           </div>
         </div>
       </div>
 
-      <div className="mt-6 rounded-2xl border border-white/10 bg-white/5 p-5">
+      <div className="mt-6 rounded-2xl border border-fuchsia-400/20 bg-fuchsia-500/5 p-5">
         <div className="text-sm font-bold">Paso 3 — Envía el comprobante y recibe el acceso</div>
         <p className="mt-2 text-sm text-white/70">
           Cuando pagues, envía el comprobante por WhatsApp y te damos acceso inmediato al Drive. Si compras el Paquete #2,
@@ -1472,11 +1625,10 @@ function PaymentsSection({
           </a>
         </div>
 
-        <div className="mt-3 text-xs text-white/60">
-          Tip: puedes fijar el chat para que el cliente vea instrucciones y reciba el Drive ahí mismo.
-        </div>
+        
       </div>
-    </section>
+      </section>
+    </div>
   );
 }
 
