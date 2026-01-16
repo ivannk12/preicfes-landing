@@ -190,7 +190,7 @@ export default function LandingClient() {
         }}
       />
 
-      <VideoSection
+      {/* <VideoSection
         id="video-recorrido"
         eyebrow="RECORRIDO REAL"
         title="Mira el material por dentro"
@@ -202,7 +202,7 @@ export default function LandingClient() {
           "Simulacros y respuestas explicadas",
         ]}
         primary={{ label: "⚡️ Quiero ver las ofertas", onClick: () => scrollToId("packages") }}
-      />
+      /> */}
 
       <ExamplesAccordion />
 
@@ -662,52 +662,184 @@ function IncludesSection() {
 ====================================================== */
 
 function PersonalPlanSection({ onViewP2 }: { onViewP2: () => void }) {
+  const [activeTab, setActiveTab] = useState<"plan" | "registro">("plan");
   const benefits = [
     "Te dice EXACTAMENTE qué hacer y en qué orden (sin improvisar)",
     "Se adapta a tu fecha, ritmo, tiempo disponible y materias",
     "Evitas perder tiempo con cuadernillos que no te aportan",
     "Llegas con meses de ventaja y progreso medible",
   ];
+  const tabs = [
+    {
+      key: "plan" as const,
+      label: "Plan de Estudio Personalizado",
+      big: "/plandeestudioyregistro/ejemploplan1.jpg",
+      thumbs: [
+        "/plandeestudioyregistro/ejemploplan2.jpg",
+        "/plandeestudioyregistro/ejemploplan3.jpg",
+        "/plandeestudioyregistro/ejemploplan4.jpg",
+        "/plandeestudioyregistro/ejemploplan5.jpg",
+      ],
+    },
+    {
+      key: "registro" as const,
+      label: "Registro de Progreso",
+      big: "/plandeestudioyregistro/ejemploregistro1.jpg",
+      thumbs: [
+        "/plandeestudioyregistro/ejemploregistro2.jpeg",
+        "/plandeestudioyregistro/ejemploregistro3.jpg",
+        "/plandeestudioyregistro/ejemploregistro4.jpg",
+        "/plandeestudioyregistro/ejemploregistro5.jpg",
+      ],
+    },
+  ];
+  const defaultBigByTab = {
+    plan: tabs[0].big,
+    registro: tabs[1].big,
+  };
+  const [selectedBigByTab, setSelectedBigByTab] = useState<Record<"plan" | "registro", string>>(defaultBigByTab);
+  const current = tabs.find((t) => t.key === activeTab) ?? tabs[0];
+  const currentBig = selectedBigByTab[activeTab] || current.big;
+  const allImages = [current.big, ...current.thumbs];
+  const thumbImages = allImages.filter((src) => src !== currentBig).slice(0, 4);
 
   return (
     <section className="mx-auto max-w-6xl px-5 py-10 md:py-14" aria-label="Plan personalizado">
-      <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
+      <div className="flex flex-col gap-6">
         <div>
           <div className="inline-flex items-center gap-2 rounded-full border border-fuchsia-400/30 bg-fuchsia-500/10 px-3 py-1 text-xs font-semibold text-fuchsia-200">
             <span className="h-2 w-2 rounded-full bg-fuchsia-300 shadow-[0_0_18px_rgba(232,121,249,0.7)]" />
             Incluido en Paquete #2
           </div>
           <h2 className="mt-3 text-2xl font-black tracking-tight md:text-3xl">
-            Plan de Estudio Personalizado
+            Plan de Estudio Personalizado y Registro de Progreso
           </h2>
           <p className="mt-2 text-sm leading-relaxed text-white/70">
-            El diferencial #1: harás únicamente los mejores cuadernillos y el orden correcto según tu objetivo.
+            Selecciona el ejemplo y mira cómo se ve por dentro.
           </p>
         </div>
 
-        <button onClick={onViewP2} className="btn-primary">
-          Ver Paquete #2 (Más vendido)
-        </button>
       </div>
 
-      <div className="mt-6 grid gap-4 md:grid-cols-2">
-        <div className="rounded-2xl border border-white/10 bg-white/5 p-5">
-          <div className="text-sm font-bold">¿Qué recibes?</div>
-          <ul className="mt-3 space-y-2 text-sm text-white/75">
-            <li className="flex gap-2"><Check /> Cronograma a tu ritmo</li>
-            <li className="flex gap-2"><Check /> Priorización por materias</li>
-            <li className="flex gap-2"><Check /> Ruta clara: qué hacer cada día</li>
-            <li className="flex gap-2"><Check /> Entrega en pocas horas por WhatsApp</li>
-          </ul>
+      <div className="mt-6 flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+        <div className="rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-white/70">
+          Selecciona para ver el ejemplo 👉
+        </div>
+        <div className="flex flex-wrap gap-3">
+          {tabs.map((tab) => {
+            const isActive = tab.key === activeTab;
+            return (
+              <button
+                key={tab.key}
+                onClick={() => setActiveTab(tab.key)}
+                className={cn(
+                  "rounded-full border px-4 py-2 text-sm font-semibold transition",
+                  isActive
+                    ? "border-white/40 bg-white/15 text-white"
+                    : "border-white/10 bg-white/5 text-white/70 hover:bg-white/10"
+                )}
+              >
+                {tab.label}
+              </button>
+            );
+          })}
+        </div>
+      </div>
+
+      <div className="mt-6 grid gap-6 md:grid-cols-2 md:items-start">
+        <div>
+          <div className="overflow-hidden rounded-2xl border border-white/10 bg-white/5">
+            <img
+              src={currentBig}
+              alt={current.label}
+              className="h-full w-full object-cover"
+              loading="lazy"
+            />
+          </div>
+          <div className="mt-3 grid grid-cols-2 gap-2 md:grid-cols-4">
+            {thumbImages.map((src, idx) => (
+              <button
+                key={`${current.key}-${idx}`}
+                type="button"
+                onClick={() =>
+                  setSelectedBigByTab((prev) => ({
+                    ...prev,
+                    [current.key]: src,
+                  }))
+                }
+                className={cn(
+                  "overflow-hidden rounded-xl border bg-white/5 transition",
+                  currentBig === src ? "border-white/40" : "border-white/10 hover:border-white/25"
+                )}
+              >
+                <img src={src} alt={`${current.label} ${idx + 2}`} className="h-full w-full object-cover" loading="lazy" />
+              </button>
+            ))}
+          </div>
         </div>
 
         <div className="rounded-2xl border border-white/10 bg-white/5 p-5">
-          <div className="text-sm font-bold">Beneficios directos</div>
-          <ul className="mt-3 space-y-2 text-sm text-white/75">
-            {benefits.map((b) => (
-              <li key={b} className="flex gap-2"><Spark /> {b}</li>
-            ))}
-          </ul>
+          {activeTab === "plan" ? (
+            <div className="space-y-3 text-sm text-white/80">
+              <div className="font-semibold text-white">
+                🚀 La herramienta definitiva para asegurar un puntaje alto en el ICFES 🎓
+              </div>
+              <p>
+                🌟 Dentro del Material de estudio hay <span className="font-semibold text-white">miles de archivos</span>, ¿como
+                saber por cual empezar?
+              </p>
+              <p>
+                📚📘 <span className="font-semibold text-white">Por eso creamos</span> el{" "}
+                <span className="font-semibold text-white">Plan de Estudio Personalizado en PDF</span>, una guía tipo calendario
+                extra al drive que te dirá día a día qué preguntas hacer, buscando que te prepares siempre con{" "}
+                <span className="font-semibold text-white">las preguntas reales más recientes</span>, con respuesta explicada y formularios.
+              </p>
+              <div className="font-semibold text-white">📙 ¿Por qué este plan es tan único?</div>
+              <ul className="space-y-2">
+                <li>⚡️ Adaptado al ICFES 2026: harás solamente los mejores cuadernillos adaptados a tu ritmo.</li>
+                <li>⚡️ Tendrás un orden claro para seguir cada día.</li>
+                <li>⚡️ Nunca te quedarás sin saber qué cuadernillo del material hacer.</li>
+                <li>⚡️ Formarás un hábito de estudio inquebrantable.</li>
+                <li>⚡️ Podrás proyectar y calcular todo tu estudio hasta el día del examen.</li>
+              </ul>
+              <div className="font-semibold text-white">🎨 Personalizable:</div>
+              <ul className="space-y-2">
+                <li>🔹 Elige la fecha de inicio y de fin.</li>
+                <li>🔹 Ajusta la cantidad de preguntas diarias.</li>
+                <li>🔹 Personaliza los colores a tu gusto.</li>
+                <li>🔹 Escoge los días de la semana que prefieres estudiar.</li>
+                <li>🔹 Selecciona las materias que quieras darle más enfoque según tu carrera.</li>
+              </ul>
+            </div>
+          ) : (
+            <div className="space-y-3 text-sm text-white/80">
+              <div className="font-semibold text-white">✨ ¡Registra tu avance como un futuro 500! ✨</div>
+              <p>
+                Este es <span className="font-semibold text-white">solo un ejemplo</span> de la herramienta que viene incluida con tu
+                plan de estudios. 📕
+              </p>
+              <p>
+                Tu <span className="font-semibold text-white">Registro de Progreso o Bitácora ICFES</span> será uno de tus mejores
+                compañeros en tu camino hacia el puntaje que sueñas. Servirá para ir contabilizando tu puntaje a lo largo de tu
+                preparación y plan de estudio; cada vez que termines uno de los más de 80 formularios de google podrás registrar tu
+                puntaje.
+              </p>
+              <ul className="space-y-2">
+                <li>🔹 Aquí anotarás cuántas preguntas buenas tuviste en cada formulario.</li>
+                <li>🔹 Podrás saber qué tanto estás mejorando por materia y en cada simulacro que hagas.</li>
+                <li>🔹 Te darás cuenta qué materias tienes que reforzar más y cuáles son tus fortalezas.</li>
+                <li>🔹 Tendrás un registro de cuántas preguntas buenas y malas tuviste.</li>
+                <li>🔹 Conocerás a detalle cuántas preguntas te hicieron falta para alcanzar el puntaje perfecto en cada materia.</li>
+              </ul>
+              <div>📊 Llevarás el control de tus resultados y medirás tu progreso real.</div>
+              <div className="font-semibold text-white">¡Así estudiarás con estrategia y mejorarás en cada simulacro! 🚀</div>
+            </div>
+          )}
+          <div className="mt-5 flex justify-center">
+            <button onClick={onViewP2} className="btn-primary">
+              Ver Paquete #2 (Más vendido)
+            </button>
+          </div>
         </div>
       </div>
     </section>
