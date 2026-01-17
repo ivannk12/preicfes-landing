@@ -531,7 +531,15 @@ function TestimonialsSection() {
 function HorizontalGallery({
   items,
 }: {
-  items: Array<{ id: string; img: string; alt: string; caption?: string }>;
+  items: Array<{
+    id: string;
+    img: string;
+    alt: string;
+    type?: "puntaje" | "chat";
+    caption?: string;
+    name?: string;
+    quote?: string;
+  }>;
 }) {
   const scrollerRef = useRef<HTMLDivElement | null>(null);
 
