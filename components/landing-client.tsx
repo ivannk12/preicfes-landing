@@ -10,8 +10,14 @@ const BRAND = "PreICFES Material";
 
 // WhatsApp
 const WHATSAPP_NUMBER = "+573208234642"; // ✅ tu número
-const WHATSAPP_BASE_MESSAGE =
-  "Hola, quiero información sobre PreICFES Material y el plan personalizado.";
+const WHATSAPP_HERO_MESSAGE =
+  "🏆📚Holaa, Me gustaría adquirir el *Material ICFES 2026*, quiero más información 😊";
+const WHATSAPP_FLOATING_MESSAGE =
+  "🎓🚀 Holaa, Me gustaría adquirir el *Material ICFES 2026*, quiero más información 😊";
+const WHATSAPP_GUARANTEE_MESSAGE =
+  "🌟📘 Holaa, estuve viendo la info y quiero acceder por favor al *Material ICFES Supremo* por 30 minutos para conocer bien todo lo que incluye 😊";
+const WHATSAPP_INFO_MESSAGE =
+  "📙🎓 Holaa, Me gustaría adquirir el *Material ICFES 2026*, tengo una pregunta 😊";
 
 // Paquetes / precios
 const PRICE_1_OLD = 80000;
@@ -151,15 +157,21 @@ export default function LandingClient() {
   // Paquete preseleccionado para que la sección de pagos se adapte
   const [selectedPackage, setSelectedPackage] = useState<1 | 2>(2);
 
-  const waGeneral = useMemo(
-    () => makeWaLink(WHATSAPP_BASE_MESSAGE),
-    [WHATSAPP_BASE_MESSAGE, makeWaLink]
+  const waHero = useMemo(() => makeWaLink(WHATSAPP_HERO_MESSAGE), [WHATSAPP_HERO_MESSAGE, makeWaLink]);
+  const waFloating = useMemo(
+    () => makeWaLink(WHATSAPP_FLOATING_MESSAGE),
+    [WHATSAPP_FLOATING_MESSAGE, makeWaLink]
   );
+  const waGuarantee = useMemo(
+    () => makeWaLink(WHATSAPP_GUARANTEE_MESSAGE),
+    [WHATSAPP_GUARANTEE_MESSAGE, makeWaLink]
+  );
+  const waInfo = useMemo(() => makeWaLink(WHATSAPP_INFO_MESSAGE), [WHATSAPP_INFO_MESSAGE, makeWaLink]);
 
   const waProofP1 = useMemo(
     () =>
       makeWaLink(
-        `Hola, quiero el Paquete #1 (${PACKAGE_1_NAME}). Ya hice el pago y adjunto comprobante.\n\nNombre: ____\nCorreo (opcional): ____`
+        "Holaa 😊, me gustaría adquirir el 📘 Paquete #1 (🎓📚MATERIAL DE ESTUDIO SUPREMO). Ya hice el pago y adjunto comprobante.\n\nNombre: ___\nCorreo: ___"
       ),
     [PACKAGE_1_NAME, makeWaLink]
   );
@@ -167,7 +179,7 @@ export default function LandingClient() {
   const waProofP2 = useMemo(
     () =>
       makeWaLink(
-        `Hola, quiero el Paquete #2 (${PACKAGE_2_NAME}). Ya hice el pago y adjunto comprobante.\n\nNombre: ____\nFecha ICFES (si la sabes): ____\nObjetivo de puntaje: ____`
+        "Holaa 😊, me gustaría adquirir el 📗Paquete #2 (🎓🏆 MATERIAL DE ESTUDIO SUPREMO + 🗓️ PLAN DE ESTUDIO PERSONALIZADO). Ya hice el pago y adjunto comprobante.\n\nNombre: ___\nCorreo:___"
       ),
     [PACKAGE_2_NAME, makeWaLink]
   );
@@ -183,7 +195,7 @@ export default function LandingClient() {
       <Hero
         onViewPackages={() => scrollToId("packages")}
         onMiniTest={() => scrollToId("mini-test")}
-        waLink={waGeneral}
+        waLink={waHero}
         rightContent={
           <div className="card-neo p-5 md:p-6">
             <div className="space-y-2">
@@ -261,7 +273,7 @@ export default function LandingClient() {
         onGoPay={() => scrollToId("payments")}
       />
 
-      <GuaranteeSection waLink={waGeneral} />
+      <GuaranteeSection waLink={waGuarantee} />
 
       <LimitedOfferSection deadlineISO={DEADLINE_ISO} onGoPay={() => scrollToId("payments")} />
 
@@ -280,9 +292,9 @@ export default function LandingClient() {
         waProofP2={waProofP2}
       />
 
-      <Footer waLink={waGeneral} />
+      <Footer waLink={waHero} />
 
-      <FloatingWhatsApp waLink={waGeneral} />
+      <FloatingWhatsApp waLink={waFloating} />
 
       <StyleTokens />
     </main>
@@ -1644,9 +1656,9 @@ function PaymentsSection({
           <a href={proofLink} className="btn-primary">
             Enviar comprobante por WhatsApp
           </a>
-          <a href={makeWaLink(WHATSAPP_BASE_MESSAGE)} className="btn-secondary">
-            Hacer una pregunta
-          </a>
+            <a href={waInfo} className="btn-secondary">
+              Hacer una pregunta
+            </a>
         </div>
 
         
