@@ -290,6 +290,7 @@ export default function LandingClient() {
         setSelected={setSelectedPackage}
         waProofP1={waProofP1}
         waProofP2={waProofP2}
+        waInfo={waInfo}
       />
 
       <Footer waLink={waHero} />
@@ -1575,11 +1576,13 @@ function PaymentsSection({
   setSelected,
   waProofP1,
   waProofP2,
+  waInfo,
 }: {
   selected: 1 | 2;
   setSelected: (v: 1 | 2) => void;
   waProofP1: string;
   waProofP2: string;
+  waInfo: string;
 }) {
   const proofLink = selected === 1 ? waProofP1 : waProofP2;
 
