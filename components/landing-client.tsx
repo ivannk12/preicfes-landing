@@ -16,11 +16,11 @@ const WHATSAPP_BASE_MESSAGE =
 // Paquetes / precios
 const PRICE_1_OLD = 80000;
 const PRICE_1_NOW = 60000;
-const PRICE_2_OLD = 130000;
+const PRICE_2_OLD = 135000;
 const PRICE_2_NOW = 95000;
 
 const PACKAGE_1_NAME = "MATERIAL DE ESTUDIO SUPREMO";
-const PACKAGE_2_NAME = "MATERIAL DE ESTUDIO SUPREMO + PLAN DE ESTUDIO PERSONALIZADO";
+const PACKAGE_2_NAME = "🎓 MATERIAL DE ESTUDIO SUPREMO + 🗓️ PLAN DE ESTUDIO PERSONALIZADO";
 
 // Links de pago (Wompi / PSE) – 2 links (uno por paquete)
 const WOMPI_LINK_P1 = ""; // 🔗 pega aquí link Paquete #1
@@ -28,10 +28,10 @@ const WOMPI_LINK_P2 = ""; // 🔗 pega aquí link Paquete #2
 
 // Transferencias
 const NEQUI_NUMBER = "3168695397";
-const BANK_NAME = "Bancolombia";
+const BANK_NAME = "🏦 Bancolombia";
 const BANCOLOMBIA_ACCOUNT = "75675989958";
 const ACCOUNT_HOLDER = "Iván Gómez";
-const LLAVE = "TuLlaveAquí";
+const LLAVE = "3168695397";
 
 // Deadline del contador (15 marzo 2026)
 const DEADLINE_ISO = "2026-03-15T23:59:59-05:00"; // America/Bogota
@@ -63,7 +63,7 @@ const TESTIMONIALS: Array<{
     img: "/Testimonios/Puntajes/zuluaga.jpg",
     alt: "Puntaje Miguel Zuluaga",
     name: "Miguel Zuluaga",
-    quote: "\"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.\"",
+    quote: "\"Me preparé para el ICFES casi un año por mi cuenta, y aún así, con solo un mes usando el material supremo aprendí más que con todo lo que hice antes.\"",
   },
   {
     id: "p-2",
@@ -71,7 +71,7 @@ const TESTIMONIALS: Array<{
     img: "/Testimonios/Puntajes/Nicolas Ramirez.png",
     alt: "Puntaje Nicolas Ramirez",
     name: "Nicolas Ramirez",
-    quote: "\"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.\"",
+    quote: "\"Preicfes Material me ayudó mucho para practicar, en otros materiales las preguntas están desordenadas o sin respuesta, y en este tuve todo junto, es satisfactorio que gracias a este material y el apoyo que brinda pude pasar a medicina a la UIS, U caldas y U cauca.\"",
   },
   {
     id: "p-3",
@@ -95,7 +95,7 @@ const TESTIMONIALS: Array<{
     img: "/Testimonios/Puntajes/paula.jpg",
     alt: "Puntaje Maria Paula",
     name: "Maria Paula Osso",
-    quote: "\"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.\"",
+    quote: "\"Este material fue clave en mi preparación para el ICFES. De verdad me ayudó muchísimo a entender mejor y a confiar más en mí durante el proceso. Con constancia y disciplina los resultados se notan y gracias a este apoyo logré el puntaje que me permitió acercarme a mis sueños. Muy agradecida por todo ✨\"",
   },
   { id: "c-1", type: "chat", img: "/Testimonios/Chats/chat1.jpg", alt: "Chat testimonio 1" },
   { id: "c-2", type: "chat", img: "/Testimonios/Chats/chat2.jpg", alt: "Chat testimonio 2" },
@@ -626,7 +626,7 @@ function TransformationSection() {
         <div className="space-y-4">
           <div className="text-xs font-semibold tracking-widest text-white/60">TRANSFORMACIÓN</div>
           <h2 className="text-2xl font-black tracking-tight md:text-3xl">
-            Lo que cambia cuando estudias con orden
+            📚 Lo que sentirás en cada fase de tu preparación 
           </h2>
           <p className="text-sm leading-relaxed text-white/70">
             Tres sensaciones que casi todos viven: antes, durante y después de prepararse con el material.
@@ -634,18 +634,18 @@ function TransformationSection() {
 
           <div className="grid gap-3">
             <NeonCard
-              title="Antes"
-              desc="Ansiedad por no saber por dónde empezar, sensación de ir tarde y estudiar sin rumbo."
+              title="Antes de preparate con Preicfes Material"
+              desc="Ansiedad por no saber por dónde empezar, ves al ICFES como algo dificil, crees que vas tarde, que cada vez queda menos tiempo y no has avanzado nada."
               tone="danger"
             />
             <NeonCard
-              title="Durante"
-              desc="Control total: sigues un plan, practicas con preguntas reales y mides tu progreso con formularios automáticos."
+              title="Durante tu preparación"
+              desc="Sientes que vas por el camino correcto hacia tu meta con un sistema organizado y dinámico, empiezas a formar un hábito y cada día las preguntas se empiezan a ver más fáciles."
               tone="info"
             />
             <NeonCard
-              title="Después"
-              desc="Seguridad: llegas con meses de ventaja, con estrategia y confianza para subir tu puntaje."
+              title="El día del examen"
+              desc="Llegas al ICFES con la seguridad y confianza de que sacarás el mejor puntaje, ninguna pregunta te da miedo, al contrario, sientes entusiasmo porque te entreguen la hoja del examen porque sabes que te va a ir increíble."
               tone="success"
             />
           </div>
@@ -786,7 +786,7 @@ function IncludesSection() {
         </div>
 
         <div className="space-y-3">
-          <div className="text-xs text-white/50">Haz click para conocer el contenido</div>
+          <div className="text-xs text-white/50">👉 Haz click para conocer el contenido</div>
           {items.map((it) => (
             <details
               key={it.title}
@@ -1106,20 +1106,28 @@ function PackagesSection({
   onGoPay: () => void;
 }) {
   const p1Bullets = [
-    "Cuadernillos oficiales 2017–2025 (los mejores)",
-    "Respuestas explicadas paso a paso",
-    "+80 formularios automáticos (calificación inmediata)",
-    "Simulacros VIP + compilados por materia",
-    "Clases grabadas + temarios",
-    "Acceso permanente + actualizaciones semanales",
+    "📚 Preguntas Reales 2017 - 2025 Cal A y B",
+    "✏️ Respuestas Explicadas Paso a Paso",
+    "📊 +80 Formularios con Calificación Automática",
+    "🏆 Simulacros VIP",
+    "📙 Mini Test Diagnóstico 2026",
+    "🎥 +200 Clases Grabadas",
+    "⚡️ Compilados VIP por materia",
+    "📓 Tips y Temarios actualizados",
+    "🏛️ PreUNAL y PreUDEA",
   ];
 
   const p2Bullets = [
-    "Todo lo del Paquete #1",
-    "Plan de Estudio Personalizado (entregado por WhatsApp)",
-    "Cronograma a tu ritmo + priorización por materias",
-    "Guía clara: qué hacer y en qué orden",
-    "Soporte por WhatsApp",
+    "✅ Todo lo del Paquete #1 incluido",
+    "🗓️ Plan de Estudio Personalizado",
+    "🧭 Registro de Progreso ICFES",
+  ];
+  const p2Personalize = [
+    "Fecha de inicio y de fin",
+    "Cantidad de preguntas por día",
+    "Colores de cada cuadernillo",
+    "Días de la semana que prefieres estudiar",
+    "Materias en las que quieras darle más enfoque según tu carrera",
   ];
 
   return (
@@ -1127,29 +1135,28 @@ function PackagesSection({
       <section id="packages" className="mx-auto max-w-6xl px-5 py-10 md:py-14" aria-label="Paquetes">
         <div className="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
           <div>
-            <div className="text-xs font-semibold tracking-widest text-white/60">OFERTAS</div>
+            <div className="text-xs font-semibold tracking-widest text-white/60">OFERTAS POR TIEMPO LIMITADO</div>
             <h2 className="mt-2 text-2xl font-black tracking-tight md:text-3xl">
-              Elige tu paquete
+              🚀 Elige tu paquete
             </h2>
             <p className="mt-2 text-sm text-white/70">
-              Pago único · Acceso permanente · Actualizaciones semanales
+              · 💳 Único Pago (sin mensualidades) · ♾️ Acceso permanente   · 👨🏻‍💻 Soporte 24/7 para resolver tus dudas
             </p>
           </div>
-          <div className="text-xs text-white/60">Luego bajas a “Métodos de pago”</div>
         </div>
 
         <div className="mt-6 grid gap-4 md:grid-cols-2">
           {/* Paquete 1 */}
-          <div
-            className={cn(
-              "card-neo p-6",
-              selected === 1 && "ring-1 ring-cyan-300/40 shadow-[0_0_32px_rgba(34,211,238,0.10)]"
-            )}
-          >
+        <div
+          className={cn(
+            "card-neo border border-amber-300/60 shadow-[0_0_18px_rgba(251,191,36,0.2)] p-6",
+            selected === 1 && "ring-2 ring-amber-300/90 shadow-[0_0_32px_rgba(251,191,36,0.35)]"
+          )}
+        >
             <div className="flex items-start justify-between gap-3">
               <div>
-                <div className="text-xs text-white/60">PAQUETE #1</div>
-                <div className="mt-1 text-lg font-black">{PACKAGE_1_NAME}</div>
+              <div className="text-xs text-white/60">📘 PAQUETE #1</div>
+              <div className="mt-1 text-lg font-black">🎓 MATERIAL DE ESTUDIO SUPREMO</div>
               </div>
               <button
                 type="button"
@@ -1167,9 +1174,9 @@ function PackagesSection({
             </div>
 
             <div className="mt-4 grid gap-2 text-sm text-white/75">
-              {p1Bullets.map((b) => (
-                <div key={b} className="flex gap-2"><Check /> {b}</div>
-              ))}
+            {p1Bullets.map((b) => (
+              <div key={b} className="flex gap-2"><Check /> {b}</div>
+            ))}
             </div>
 
             <button onClick={onGoPay} className="btn-primary mt-6 w-full">
@@ -1179,17 +1186,16 @@ function PackagesSection({
           </div>
 
           {/* Paquete 2 */}
-          <div
-            className={cn(
-              "card-neo p-6",
-              "border-fuchsia-400/30 bg-fuchsia-500/10",
-              selected === 2 && "ring-1 ring-fuchsia-300/50 shadow-[0_0_44px_rgba(232,121,249,0.14)]"
-            )}
-          >
+        <div
+          className={cn(
+            "card-neo border border-amber-300/60 shadow-[0_0_18px_rgba(251,191,36,0.2)] p-6",
+            selected === 2 && "ring-2 ring-amber-300/90 shadow-[0_0_40px_rgba(251,191,36,0.35)]"
+          )}
+        >
             <div className="flex items-start justify-between gap-3">
               <div>
                 <div className="flex items-center gap-2">
-                  <div className="text-xs text-white/60">PAQUETE #2</div>
+                  <div className="text-xs text-white/60">📗 🏆 PAQUETE #2</div>
                   <span className="rounded-full bg-fuchsia-400/15 px-2 py-0.5 text-[11px] font-semibold text-fuchsia-100">
                     Más vendido
                   </span>
@@ -1213,7 +1219,13 @@ function PackagesSection({
 
             <div className="mt-4 grid gap-2 text-sm text-white/75">
               {p2Bullets.map((b) => (
-                <div key={b} className="flex gap-2"><Spark /> {b}</div>
+                <div key={b} className="flex gap-2"><Check /> {b}</div>
+              ))}
+            </div>
+            <div className="mt-4 text-sm font-semibold text-white">🎨 Puedes personalizar:</div>
+            <div className="mt-2 grid gap-2 text-sm text-white/75">
+              {p2Personalize.map((b) => (
+                <div key={b} className="flex gap-2"><Check /> {b}</div>
               ))}
             </div>
 
@@ -1351,23 +1363,26 @@ function TimeBox({ label, value }: { label: string; value: number }) {
 
 function FitSection() {
   const no = [
-    "Quieres resultados sin estudiar nada",
+    "Eres de los que quieren resultados sin estudiar nada",
     "Buscas trucos mágicos sin practicar",
-    "No vas a seguir un plan ni medir progreso",
+    "No vas a seguir un plan ni medir tu progreso",
     "Solo piensas improvisar el último mes",
+    "Crees que el puntaje en el ICFES es “suerte“",
   ];
 
   const yes = [
-    "Quieres subir puntaje con estructura real",
-    "Te sirve tener TODO organizado en un solo lugar",
-    "Quieres practicar con preguntas reales + explicación",
+    "Quieres tener la oportunidad de luchar por una meta importante",
+    "Tienes pensado sacar el mejor puntaje de tu colegio o ciudad",
+    "Te gusta tener TODO organizado en un solo lugar",
+    "Quieres practicar con preguntas reales con explicación",
     "Quieres llegar con meses de ventaja al ICFES",
   ];
 
   return (
     <section className="mx-auto max-w-6xl px-5 py-10 md:py-14" aria-label="Para quién es">
       <div className="grid gap-4 md:grid-cols-2">
-        <div className="card-neo p-6">
+        <div className="relative rounded-2xl border border-white/10 bg-white/5 p-6 shadow-[0_0_40px_rgba(248,113,113,0.2)]">
+          <div className="absolute inset-y-4 left-0 w-1 rounded-full bg-rose-500 shadow-[0_0_18px_rgba(244,63,94,0.8)]" />
           <div className="text-sm font-black text-white">Este material NO es para ti si…</div>
           <ul className="mt-4 space-y-2 text-sm text-white/75">
             {no.map((x) => (
@@ -1376,7 +1391,8 @@ function FitSection() {
           </ul>
         </div>
 
-        <div className="card-neo p-6 border-emerald-400/20 bg-emerald-500/5">
+        <div className="relative rounded-2xl border border-emerald-400/20 bg-emerald-500/5 p-6 shadow-[0_0_40px_rgba(34,197,94,0.2)]">
+          <div className="absolute inset-y-4 left-0 w-1 rounded-full bg-emerald-400 shadow-[0_0_18px_rgba(52,211,153,0.8)]" />
           <div className="text-sm font-black text-white">Este material SÍ es para ti si…</div>
           <ul className="mt-4 space-y-2 text-sm text-white/75">
             {yes.map((x) => (
@@ -1484,28 +1500,28 @@ function MiniTestSection() {
 function FAQSection() {
   const faqs = [
     {
-      q: "¿El acceso es para siempre?",
-      a: "Sí. Es un único pago y el acceso es permanente. Además, hay actualizaciones semanales.",
+      q: "¿Por cuanto tiempo tengo acceso al material?",
+      a: "¡Es un único pago y quedas con el acceso es para siempre!. Además, hay actualizaciones semanales con nuevas respuestas explicadas y las preguntas nuevas a color que vayan saliendo.",
     },
     {
       q: "¿Cómo recibo el material?",
-      a: "Después de pagar, envías el comprobante por WhatsApp y recibes el acceso inmediato al Drive en el mismo chat.",
+      a: "Después de pagar, envías el comprobante por WhatsApp y recibes el acceso inmediato al Drive en el mismo chat con el correo que escogas, el plan de estudio se entrega en pdf pocas horas después por el mismo Whatsapp.",
     },
     {
       q: "¿Qué diferencia hay entre Paquete #1 y #2?",
-      a: "El Paquete #2 incluye TODO lo del #1 + Plan de Estudio Personalizado (cronograma a tu ritmo entregado en pocas horas por WhatsApp).",
+      a: "El Paquete #2 incluye TODO lo del Paquete #1, la diferencia está en que el Paquete #2 te incluye el Plan de Estudio Personalizado y el Registro de progeso (cronograma a tu ritmo entregado en pdf pocas horas después de realizar tu compra por WhatsApp).",
     },
     {
-      q: "¿Sirve si voy mal o si estoy empezando?",
-      a: "Sí. El material está organizado y el plan (paquete #2) se adapta a tu nivel y tiempo.",
+      q: "¿Sirve si estoy en noveno o decimo?",
+      a: "Sí, tenemos decenas de estudiantes que empezaron con nosotros desde octavo y noveno, incluso estás de suerte, ya que te podrás preparar con mucho tiempo de ventaja, y al ser un único pago, estarías desde ya asegurando toda tu preparación.",
     },
     {
-      q: "¿Los formularios califican automáticamente?",
-      a: "Sí. Tienes +80 formularios y simulacros con calificación automática para medir tu progreso real.",
+      q: "¿Los simulacros me dan mi puntaje?",
+      a: "Sí, tendrás más de 80 formularios de google que te dirán tu puntaje al final, al igual que la cantidad de preguntas buenas y malas, sabrás en cuales te equivocaste para luego ver las explicaciones paso a paso",
     },
     {
       q: "¿Puedo usarlo desde el celular?",
-      a: "Sí. Puedes abrir el Drive y los formularios desde celular o computador.",
+      a: "Sí, puedes abrir el Drive desde celular, tablet o computador.",
     },
   ];
 
@@ -1515,7 +1531,7 @@ function FAQSection() {
         <div>
           <div className="text-xs font-semibold tracking-widest text-white/60">FAQ</div>
           <h2 className="mt-2 text-2xl font-black tracking-tight md:text-3xl">Preguntas frecuentes</h2>
-          <p className="mt-2 text-sm text-white/70">Si tienes alguna otra duda distinta puedes hablarnos al Whatsapp</p>
+          <p className="mt-2 text-sm text-white/70">¡Si tienes alguna otra duda distinta puedes hablarnos al Whatsapp!</p>
         </div>
       </div>
 
@@ -1608,9 +1624,9 @@ function PaymentsSection({
             <div className="rounded-2xl border border-white/10 bg-neutral-950/40 p-4">
               <div className="text-xs font-semibold text-white/70">Transferencia</div>
               <div className="mt-2 grid gap-2 text-sm">
-                <CopyRow label="Nequi" value={NEQUI_NUMBER} note={ACCOUNT_HOLDER} />
+                <CopyRow label="📲 Nequi" value={NEQUI_NUMBER} note={ACCOUNT_HOLDER} />
                 <CopyRow label={BANK_NAME} value={BANCOLOMBIA_ACCOUNT} note={ACCOUNT_HOLDER} />
-                <CopyRow label="Llave" value={LLAVE} note={ACCOUNT_HOLDER} />
+                <CopyRow label="🔑 Llave" value={LLAVE} note={ACCOUNT_HOLDER} />
               </div>
             </div>
           </div>
@@ -1687,14 +1703,24 @@ function Footer({ waLink }: { waLink: string }) {
   return (
     <footer className="mx-auto w-full max-w-6xl px-5 pb-16 pt-8" aria-label="Footer">
       <div className="card-neo p-6">
-        <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
-          <div>
-            <div className="text-sm font-semibold text-white">{BRAND}</div>
-            <div className="text-xs text-white/60">TODO: completar contenido del footer</div>
+        <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+          <div className="flex items-center gap-4">
+            <img
+              src="/logos/logo3.png"
+              alt="PreICFES Material"
+              className="h-12 w-auto object-contain"
+              loading="lazy"
+            />
+            <div>
+              <div className="text-sm font-semibold text-white">PreICFES Material</div>
+              <div className="text-xs text-white/70">Preparación inteligente para el ICFES 2026</div>
+            </div>
           </div>
-          <a href={waLink} className="btn-secondary">
-            Hablar por WhatsApp
-          </a>
+          <div className="text-xs text-white/50">
+            <div>© 2026 PreICFES Material</div>
+            <div>Todos los derechos reservados</div>
+            <div>Material educativo – No afiliado al ICFES</div>
+          </div>
         </div>
       </div>
     </footer>
