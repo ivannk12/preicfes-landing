@@ -193,7 +193,7 @@ export default function LandingClient() {
   return (
     <main className="relative min-h-[100svh] overflow-x-hidden bg-neutral-950 text-neutral-50 selection:bg-fuchsia-400/30 selection:text-white">
       <Hero
-        onViewPackages={() => scrollToId("packages")}
+        onViewPackages={() => scrollToId("paquetes")}
         onMiniTest={() => scrollToId("mini-test")}
         waLink={waHero}
         rightContent={
@@ -246,7 +246,7 @@ export default function LandingClient() {
         <PersonalPlanSection
           onViewP2={() => {
             setSelectedPackage(2);
-            scrollToId("packages");
+            scrollToId("paquetes");
           }}
         />
       </div>
@@ -270,12 +270,12 @@ export default function LandingClient() {
       <PackagesSection
         selected={selectedPackage}
         onSelect={setSelectedPackage}
-        onGoPay={() => scrollToId("payments")}
+        onGoPay={() => scrollToId("pagos")}
       />
 
       <GuaranteeSection waLink={waGuarantee} />
 
-      <LimitedOfferSection deadlineISO={DEADLINE_ISO} onGoPay={() => scrollToId("payments")} />
+      <LimitedOfferSection deadlineISO={DEADLINE_ISO} onGoPay={() => scrollToId("pagos")} />
 
       <FitSection />
 
