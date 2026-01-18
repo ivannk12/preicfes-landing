@@ -756,7 +756,7 @@ function IncludesSection() {
   ];
 
   return (
-    <section id="acceso" className="mx-auto max-w-6xl px-5 py-10 md:py-14" aria-label="Qué incluye">
+    <section id="queincluye" className="mx-auto max-w-6xl px-5 py-10 md:py-14" aria-label="Qué incluye">
       <div className="flex flex-col gap-3">
         <div>
           <div className="text-xs font-semibold tracking-widest text-white/60">
