@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useMemo, useRef, useState } from "react";
+import { trackContact } from "../lib/fbq";
 
 /* ======================================================
    ✅ CONFIGURACIÓN (EDITA AQUÍ)
@@ -374,7 +375,7 @@ function Hero({
                 Entrega inmediata por WhatsApp
               </span>
               <span className="h-1 w-1 rounded-full bg-white/30" />
-              <a className="underline hover:text-white" href={waLink}>
+              <a className="underline hover:text-white" href={waLink} onClick={trackContact}>
                 ¿Dudas? Escríbeme
               </a>
             </div>
@@ -1274,7 +1275,8 @@ function GuaranteeSection({ waLink }: { waLink: string }) {
             </p>
           </div>
 
-          <a href={waLink} className="btn-secondary">
+          {/* Meta Pixel Contact event: reuse trackContact on WhatsApp CTAs */}
+          <a href={waLink} className="btn-secondary" onClick={trackContact}>
             Hablar por WhatsApp
           </a>
         </div>
@@ -1656,7 +1658,7 @@ function PaymentsSection({
         </p>
 
         <div className="mt-4 flex flex-col gap-3 sm:flex-row">
-          <a href={proofLink} className="btn-primary">
+          <a href={proofLink} className="btn-primary" onClick={trackContact}>
             Enviar comprobante por WhatsApp
           </a>
             <a href={waInfo} className="btn-secondary">
@@ -1748,6 +1750,7 @@ function FloatingWhatsApp({ waLink }: { waLink: string }) {
       href={waLink}
       aria-label="WhatsApp"
       className="floating-wa"
+      onClick={trackContact}
     >
       WhatsApp
     </a>
