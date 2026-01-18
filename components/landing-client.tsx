@@ -505,7 +505,7 @@ function TestimonialsSection() {
 
   return (
     <div className="bg-glow bg-glow-proof">
-      <section className="mx-auto max-w-6xl px-5 py-10 md:py-14" aria-label="Testimonios">
+      <section id="testimonios" className="mx-auto max-w-6xl px-5 py-10 md:py-14" aria-label="Testimonios">
         <div className="flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
           <div>
             <div className="text-xs font-semibold tracking-widest text-white/60">METODO COMPROBADO</div>
@@ -756,7 +756,7 @@ function IncludesSection() {
   ];
 
   return (
-    <section className="mx-auto max-w-6xl px-5 py-10 md:py-14" aria-label="Qué incluye">
+    <section id="acceso" className="mx-auto max-w-6xl px-5 py-10 md:py-14" aria-label="Qué incluye">
       <div className="flex flex-col gap-3">
         <div>
           <div className="text-xs font-semibold tracking-widest text-white/60">
@@ -889,7 +889,7 @@ function PersonalPlanSection({ onViewP2 }: { onViewP2: () => void }) {
   const thumbImages = allImages.filter((src) => src !== currentBig).slice(0, 4);
 
   return (
-    <section className="mx-auto max-w-6xl px-5 py-10 md:py-14" aria-label="Plan personalizado">
+    <section id="plan-personalizado" className="mx-auto max-w-6xl px-5 py-10 md:py-14" aria-label="Plan personalizado">
       <div className="flex flex-col gap-6">
         <div>
           <div className="inline-flex items-center gap-2 rounded-full border border-fuchsia-400/30 bg-fuchsia-500/10 px-3 py-1 text-xs font-semibold text-fuchsia-200">
@@ -1145,7 +1145,7 @@ function PackagesSection({
 
   return (
     <div className="bg-glow bg-glow-packages">
-      <section id="packages" className="mx-auto max-w-6xl px-5 py-10 md:py-14" aria-label="Paquetes">
+      <section id="paquetes" className="mx-auto max-w-6xl px-5 py-10 md:py-14" aria-label="Paquetes">
         <div className="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
           <div>
             <div className="text-xs font-semibold tracking-widest text-white/60">OFERTAS POR TIEMPO LIMITADO</div>
@@ -1588,7 +1588,7 @@ function PaymentsSection({
 
   return (
     <div className="bg-glow bg-glow-payments">
-      <section id="payments" className="mx-auto max-w-6xl px-5 py-12 md:py-16" aria-label="Métodos de pago">
+      <section id="pagos" className="mx-auto max-w-6xl px-5 py-12 md:py-16" aria-label="Métodos de pago">
       <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
         <div>
           <div className="text-xs font-semibold tracking-widest text-white/60">PAGA Y RECIBE EL ACCESO POR WHATSAPP 📲</div>
