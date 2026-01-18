@@ -11,13 +11,13 @@ const BRAND = "PreICFES Material";
 // WhatsApp
 const WHATSAPP_NUMBER = "+573208234642"; // ✅ tu número
 const WHATSAPP_HERO_MESSAGE =
-  "🏆📚Holaa, Me gustaría adquirir el *Material ICFES 2026*, quiero más información 😊";
+  "\u{1F3C6}\u{1F4DA}Holaa, Me gustaría adquirir el *Material ICFES 2026*, quiero más información \u{1F60A}";
 const WHATSAPP_FLOATING_MESSAGE =
-  "🎓🚀 Holaa, Me gustaría adquirir el *Material ICFES 2026*, quiero más información 😊";
+  "\u{1F393}\u{1F680} Holaa, Me gustaría adquirir el *Material ICFES 2026*, quiero más información \u{1F60A}";
 const WHATSAPP_GUARANTEE_MESSAGE =
-  "🌟📘 Holaa, estuve viendo la info y quiero acceder por favor al *Material ICFES Supremo* por 30 minutos para conocer bien todo lo que incluye 😊";
+  "\u{1F31F}\u{1F4D8} Holaa, estuve viendo la info y quiero acceder por favor al *Material ICFES Supremo* por 30 minutos para conocer bien todo lo que incluye \u{1F60A}";
 const WHATSAPP_INFO_MESSAGE =
-  "📙🎓 Holaa, Me gustaría adquirir el *Material ICFES 2026*, tengo una pregunta 😊";
+  "\u{1F4D9}\u{1F393} Holaa, Me gustaría adquirir el *Material ICFES 2026*, tengo una pregunta \u{1F60A}";
 
 // Paquetes / precios
 const PRICE_1_OLD = 80000;
@@ -171,7 +171,7 @@ export default function LandingClient() {
   const waProofP1 = useMemo(
     () =>
       makeWaLink(
-        "Holaa 😊, me gustaría adquirir el 📘 Paquete #1 (🎓📚MATERIAL DE ESTUDIO SUPREMO). Ya hice el pago y adjunto comprobante.\n\nNombre: ___\nCorreo: ___"
+        "Holaa \u{1F60A}, me gustaría adquirir el \u{1F4D8} Paquete #1 (\u{1F393}\u{1F4DA}MATERIAL DE ESTUDIO SUPREMO). Ya hice el pago y adjunto comprobante.\n\nNombre: ___\nCorreo: ___"
       ),
     [PACKAGE_1_NAME, makeWaLink]
   );
@@ -179,7 +179,7 @@ export default function LandingClient() {
   const waProofP2 = useMemo(
     () =>
       makeWaLink(
-        "Holaa 😊, me gustaría adquirir el 📗Paquete #2 (🎓🏆 MATERIAL DE ESTUDIO SUPREMO + 🗓️ PLAN DE ESTUDIO PERSONALIZADO). Ya hice el pago y adjunto comprobante.\n\nNombre: ___\nCorreo:___"
+        "Holaa \u{1F60A}, me gustaría adquirir el \u{1F4D7}Paquete #2 (\u{1F393}\u{1F3C6} MATERIAL DE ESTUDIO SUPREMO + \u{1F5D3}\u{FE0F} PLAN DE ESTUDIO PERSONALIZADO). Ya hice el pago y adjunto comprobante.\n\nNombre: ___\nCorreo:___"
       ),
     [PACKAGE_2_NAME, makeWaLink]
   );
