@@ -157,6 +157,7 @@ function cn(...classes: Array<string | false | undefined | null>) {
 export default function LandingClient() {
   // Paquete preseleccionado para que la sección de pagos se adapte
   const [selectedPackage, setSelectedPackage] = useState<1 | 2>(2);
+  const [floatingVisible, setFloatingVisible] = useState(false);
 
   const waHero = useMemo(() => makeWaLink(WHATSAPP_HERO_MESSAGE), [WHATSAPP_HERO_MESSAGE, makeWaLink]);
   const waFloating = useMemo(
@@ -191,10 +192,26 @@ export default function LandingClient() {
     "Material real y organizado para subir puntaje",
   ];
 
+  useEffect(() => {
+    const section = document.getElementById("queincluye");
+    if (!section) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setFloatingVisible(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.2 }
+    );
+    observer.observe(section);
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <main className="relative min-h-[100svh] overflow-x-hidden bg-neutral-950 text-neutral-50 selection:bg-fuchsia-400/30 selection:text-white">
       <Hero
-        onViewPackages={() => scrollToId("paquetes")}
+        onViewPackages={() => scrollToId("queincluye")}
         onMiniTest={() => scrollToId("mini-test")}
         waLink={waHero}
         rightContent={
@@ -296,7 +313,12 @@ export default function LandingClient() {
 
       <Footer waLink={waHero} />
 
-      <FloatingWhatsApp waLink={waFloating} />
+      <FloatingLibraryMenu
+        waLink={waFloating}
+        instagramUrl="https://www.instagram.com/icfesmaterial/"
+        onViewPackages={() => scrollToId("paquetes")}
+        visible={floatingVisible}
+      />
 
       <StyleTokens />
     </main>
@@ -361,8 +383,8 @@ function Hero({
             </ul>
 
             <div className="flex flex-col gap-3 sm:flex-row">
-              <button onClick={onViewPackages} className="btn-primary">
-                Ver Paquetes
+              <button onClick={onViewPackages} className="btn-primary hero-include-btn">
+                📘¿Que Incluye?
               </button>
               <button onClick={onMiniTest} className="btn-secondary">
                 Mini Test Diagnóstico Gratis
@@ -695,7 +717,8 @@ function TransformationSection() {
 function IncludesSection() {
   const items = [
     {
-      title: "📘 Preguntas Reales 2017 - 2025  CALENDARIO A Y B",
+      icon: "📘",
+      title: "Preguntas Reales 2017 - 2025  CALENDARIO A Y B",
       desc: "Las mejores y más recientes en todas sus versiones, organizadas para que el día de la prueba llegues con lo mejor en tu cabeza",
       images: [
         "/material/preguntas/pregunta1.png",
@@ -704,7 +727,8 @@ function IncludesSection() {
       ],
     },
     {
-      title: "✏️ Respuestas explicadas paso a paso",
+      icon: "✏️",
+      title: "Respuestas explicadas paso a paso",
       desc: "Todas las semanas estamos trabajando en darle respuesta explicada paso a paso a cada pregunta nueva que sale, garantizando comprensión absoluta de cada posible pregunta, incluyendo el tema del que trata la pregunta y su dificultad",
       images: [
         "/material/respuestas/respuesta1.png",
@@ -713,7 +737,8 @@ function IncludesSection() {
       ],
     },
     {
-      title: "📊 +80 Formularios de Google con calificación automática",
+      icon: "📊",
+      title: "+80 Formularios de Google con calificación automática",
       desc: "En cada simulacro podrás marcar y enviar tus respuestas en los Google Forms para recibir tu puntaje de inmediato, sabrás cuantas preguntas buenas y malas tuviste",
       images: [
         "/material/formularios/formulario1.png",
@@ -722,7 +747,8 @@ function IncludesSection() {
       ],
     },
     {
-      title: "📓 Tips y Temarios actualizados de todas las áreas",
+      icon: "📓",
+      title: "Tips y Temarios actualizados de todas las áreas",
       desc: "+300 Slides y archivos con explicaciones y tips de los temas que salen en el ICFES de cada materia",
       images: [
         "/material/tips/tips1.png",
@@ -731,12 +757,14 @@ function IncludesSection() {
       ],
     },
     {
-      title: "🏆 Simulacros VIP",
+      icon: "🏆",
+      title: "Simulacros VIP",
       desc: "Últimas 3000 preguntas que ha sacado el ICFES organizadas con sus respuestas explicadas y formularios. En tu Plan de Estudio Personalizado podrás escoger cuantas hacer por día, hay de sobra y siempre vamos agregando preguntas nuevas",
       images: ["/material/simulacros/simulacro1.png", "/material/simulacros/simulacro2.png"],
     },
     {
-      title: "⚡️ Compilados VIP",
+      icon: "⚡️",
+      title: "Compilados VIP",
       desc: "12 Compilados por Materia con +150 preguntas seleccionadas por cada una de las cinco materias del ICFES",
       images: [
         "/material/compilados/compilado1.png",
@@ -745,12 +773,14 @@ function IncludesSection() {
       ],
     },
     {
-      title: "🎥 Clases Grabadas",
+      icon: "🎥",
+      title: "Clases Grabadas",
       desc: "Tendrás acceso a más de 200 clases grabadas ya subidas en el material tanto prácticas y teóricas, 3 lives en tik tok semanales siguen actualizandolas",
       images: ["/material/clases/clase1.png", "/material/clases/clase2.png", "/material/clases/clase3.png"],
     },
     {
-      title: "📘📗 Material PreUNAL y PreUDEA",
+      icon: "📗",
+      title: "Material PreUNAL y PreUDEA",
       desc: "+800 archivos de preparación para los examenes de la Universidad Nacional y la Universidad de Antioquia",
       images: ["/material/preunal/unal1.png", "/material/preunal/unal2.png", "/material/preunal/unal3.png"],
     },
@@ -808,8 +838,8 @@ function IncludesSection() {
             >
               <summary className="cursor-pointer list-none">
                 <div className="flex items-center gap-3">
-                  <div className="grid h-9 w-9 place-items-center rounded-xl border border-white/10 bg-white/5">
-                    <Spark />
+                  <div className="grid h-9 w-9 place-items-center rounded-xl border border-white/10 bg-white/5 text-lg">
+                    <span aria-hidden="true">{it.icon}</span>
                   </div>
                   <div className="font-semibold">{it.title}</div>
                   <span className="ml-auto text-white/60">
@@ -1161,10 +1191,10 @@ function PackagesSection({
 
         <div className="mt-6 grid gap-4 md:grid-cols-2">
           {/* Paquete 1 */}
-        <div
+          <div
           className={cn(
-            "card-neo border border-amber-300/60 shadow-[0_0_18px_rgba(251,191,36,0.2)] p-6",
-            selected === 1 && "ring-2 ring-amber-300/90 shadow-[0_0_32px_rgba(251,191,36,0.35)]"
+            "card-neo package-card package-card-1 p-6",
+            selected === 1 && "package-card-selected-1"
           )}
         >
             <div className="flex items-start justify-between gap-3">
@@ -1193,17 +1223,17 @@ function PackagesSection({
             ))}
             </div>
 
-            <button onClick={onGoPay} className="btn-primary mt-6 w-full">
+            <button onClick={onGoPay} className="btn-primary package-btn-1 mt-6 w-full">
               ¡Quiero el Paquete #1!
             </button>
             <div className="mt-3 text-center text-xs text-white/60">Te lleva a Métodos de pago ↓</div>
           </div>
 
           {/* Paquete 2 */}
-        <div
+          <div
           className={cn(
-            "card-neo border border-amber-300/60 shadow-[0_0_18px_rgba(251,191,36,0.2)] p-6",
-            selected === 2 && "ring-2 ring-amber-300/90 shadow-[0_0_40px_rgba(251,191,36,0.35)]"
+            "card-neo package-card package-card-2 p-6",
+            selected === 2 && "package-card-selected-2"
           )}
         >
             <div className="flex items-start justify-between gap-3">
@@ -1243,7 +1273,7 @@ function PackagesSection({
               ))}
             </div>
 
-            <button onClick={onGoPay} className="btn-primary mt-6 w-full">
+            <button onClick={onGoPay} className="btn-primary package-btn-2 mt-6 w-full">
               ¡Quiero el Paquete #2!
             </button>
             <div className="mt-3 text-center text-xs text-white/60">Te lleva a Métodos de pago ↓</div>
@@ -1483,7 +1513,7 @@ function MiniTestSection() {
               <img
                 src="/minitest/minitest.png"
                 alt="Mini test diagnóstico"
-                className="mx-auto w-2/3 md:w-full object-contain"
+                className="mx-auto w-1/2 md:w-11/12 object-contain"
                 loading="lazy"
               />
             </div>
@@ -1493,7 +1523,7 @@ function MiniTestSection() {
             <div className="grid gap-3">
               <a
                 href={MINI_TEST_DRIVE_LINK || "#"}
-                className={cn("btn-primary", !MINI_TEST_DRIVE_LINK && "opacity-70 pointer-events-none")}
+                className={cn("btn-primary mini-test-btn", !MINI_TEST_DRIVE_LINK && "opacity-70 pointer-events-none")}
               >
                 Abrir Mini Test Gratis
               </a>
@@ -1608,7 +1638,7 @@ function PaymentsSection({
             <button
               className={cn(
                 "rounded-2xl border border-white/10 bg-white/5 p-4 text-left transition",
-                selected === 1 && "border-emerald-300 bg-emerald-500/20 shadow-[0_0_0_2px_rgba(52,211,153,0.35)]"
+                selected === 1 && "border-sky-300 bg-sky-500/20 shadow-[0_0_0_2px_rgba(56,189,248,0.45)]"
               )}
               onClick={() => setSelected(1)}
             >
@@ -1658,7 +1688,7 @@ function PaymentsSection({
         </p>
 
         <div className="mt-4 flex flex-col gap-3 sm:flex-row">
-          <a href={proofLink} className="btn-primary" onClick={trackContact}>
+          <a href={proofLink} className="btn-primary payment-wa-btn" onClick={trackContact}>
             Enviar comprobante por WhatsApp
           </a>
             <a href={waInfo} className="btn-secondary">
@@ -1744,16 +1774,98 @@ function Footer({ waLink }: { waLink: string }) {
   );
 }
 
-function FloatingWhatsApp({ waLink }: { waLink: string }) {
+function FloatingLibraryMenu({
+  waLink,
+  instagramUrl,
+  onViewPackages,
+  visible,
+}: {
+  waLink: string;
+  instagramUrl: string;
+  onViewPackages: () => void;
+  visible: boolean;
+}) {
+  const [open, setOpen] = useState(false);
+  const [rotating, setRotating] = useState(false);
+  const [rotateDir, setRotateDir] = useState<"cw" | "ccw">("cw");
+  const rotateTimer = useRef<number | null>(null);
+
+  useEffect(() => {
+    return () => {
+      if (rotateTimer.current) window.clearTimeout(rotateTimer.current);
+    };
+  }, []);
+
+  if (!visible) return null;
+
   return (
-    <a
-      href={waLink}
-      aria-label="WhatsApp"
-      className="floating-wa"
-      onClick={trackContact}
-    >
-      WhatsApp
-    </a>
+    <div className="floating-menu floating-menu-enter">
+      {open && (
+        <div className="floating-menu-panel" role="menu" aria-label="Accesos rápidos">
+          <button
+            type="button"
+            className="floating-menu-item floating-menu-item-packages"
+            onClick={() => {
+              onViewPackages();
+              setOpen(false);
+            }}
+          >
+            <span className="floating-menu-icon floating-menu-icon-packages" aria-hidden="true">
+              <img src="/logosdesplegable/flecha.png" alt="" />
+            </span>
+            Ver Paquetes
+          </button>
+          <a
+            href={instagramUrl}
+            className="floating-menu-item floating-menu-item-instagram"
+            target="_blank"
+            rel="noreferrer"
+            onClick={() => setOpen(false)}
+          >
+            <span className="floating-menu-icon floating-menu-icon-instagram" aria-hidden="true">
+              <img src="/logosdesplegable/instagram.png" alt="" />
+            </span>
+            Instagram +22k Seguidores
+          </a>
+          <a
+            href={waLink}
+            className="floating-menu-item floating-menu-item-whatsapp"
+            onClick={(event) => {
+              trackContact(event);
+              setOpen(false);
+            }}
+          >
+            <span className="floating-menu-icon floating-menu-icon-whatsapp" aria-hidden="true">
+              <img src="/logosdesplegable/whatsapp.png" alt="" />
+            </span>
+            Hablar por Whatsapp
+          </a>
+        </div>
+      )}
+      <button
+        type="button"
+        className="floating-menu-trigger"
+        aria-label="Abrir accesos rápidos"
+        aria-haspopup="menu"
+        aria-expanded={open}
+        data-rotating={rotating ? "true" : "false"}
+        data-rotate-dir={rotateDir}
+        onClick={() => {
+          setOpen((prev) => {
+            const next = !prev;
+            setRotateDir(next ? "ccw" : "cw");
+            return next;
+          });
+          setRotating(true);
+          if (rotateTimer.current) window.clearTimeout(rotateTimer.current);
+          rotateTimer.current = window.setTimeout(() => setRotating(false), 650);
+        }}
+      >
+        <span role="img" aria-label="Biblioteca">
+          📚
+        </span>
+      </button>
+    </div>
   );
 }
 
@@ -1886,6 +1998,205 @@ function StyleTokens() {
         padding: 0.65rem 1rem;
         font-weight: 700;
         box-shadow: 0 12px 30px rgba(34, 197, 94, 0.35);
+      }
+      .floating-menu {
+        position: fixed;
+        right: 1.2rem;
+        bottom: 1.2rem;
+        z-index: 50;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 0.75rem;
+      }
+      .floating-menu-enter {
+        animation: floatDrop 700ms ease-out;
+      }
+      .floating-menu-trigger {
+        display: grid;
+        place-items: center;
+        height: 3.8rem;
+        width: 3.8rem;
+        border-radius: 999px;
+        border: 1px solid rgba(57, 255, 20, 0.6);
+        background: #39ff14;
+        color: #041b0f;
+        font-size: 1.7rem;
+        box-shadow: 0 0 20px rgba(57, 255, 20, 0.7), 0 0 45px rgba(57, 255, 20, 0.55);
+        transition: transform 160ms ease, box-shadow 160ms ease, background 160ms ease;
+      }
+      .floating-menu-trigger:hover {
+        background: #53ff33;
+        transform: translateY(-3px);
+        box-shadow: 0 0 24px rgba(57, 255, 20, 0.8), 0 0 55px rgba(57, 255, 20, 0.6);
+      }
+      .floating-menu-trigger[data-rotating="true"][data-rotate-dir="cw"] {
+        animation: spin360cw 650ms ease-in-out;
+      }
+      .floating-menu-trigger[data-rotating="true"][data-rotate-dir="ccw"] {
+        animation: spin360ccw 650ms ease-in-out;
+      }
+      .floating-menu-panel {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        padding: 0.65rem;
+        border-radius: 0.9rem;
+        border: 1px solid rgba(80, 160, 255, 0.25);
+        background: linear-gradient(160deg, rgba(5, 12, 36, 0.96), rgba(2, 4, 14, 0.96));
+        box-shadow: 0 18px 50px rgba(0, 0, 0, 0.6);
+        min-width: 220px;
+      }
+      .floating-menu-item {
+        width: 100%;
+        text-align: left;
+        border-radius: 0.5rem;
+        border: 1px solid transparent;
+        padding: 0.65rem 0.9rem;
+        font-size: 0.85rem;
+        font-weight: 700;
+        color: #0b0b0b;
+        background: transparent;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.6rem;
+        transition: transform 150ms ease, background 150ms ease, border 150ms ease;
+      }
+      .floating-menu-item:hover {
+        transform: translateY(-1px);
+      }
+      .floating-menu-item-packages {
+        background: #22d3ee;
+        color: #041b2a;
+        box-shadow: 0 0 14px rgba(34, 211, 238, 0.7), 0 0 30px rgba(34, 211, 238, 0.45);
+      }
+      .floating-menu-item-instagram {
+        background: linear-gradient(120deg, #8b5cf6, #ec4899);
+        color: #ffffff;
+        box-shadow: 0 0 16px rgba(236, 72, 153, 0.6), 0 0 32px rgba(139, 92, 246, 0.5);
+      }
+      .floating-menu-item-whatsapp {
+        background: #22c55e;
+        color: #071c0f;
+        box-shadow: 0 0 16px rgba(34, 197, 94, 0.7), 0 0 34px rgba(34, 197, 94, 0.5);
+      }
+      .mini-test-btn {
+        background: #fb923c;
+        color: #2a1200;
+        box-shadow: 0 0 18px rgba(251, 146, 60, 0.7), 0 0 38px rgba(251, 146, 60, 0.45);
+      }
+      .mini-test-btn:hover {
+        background: #fdba74;
+      }
+      .payment-wa-btn {
+        background: #7dd3fc;
+        color: #04223a;
+        box-shadow: 0 0 18px rgba(56, 189, 248, 0.7), 0 0 40px rgba(56, 189, 248, 0.45);
+        animation: heroBounce 2.2s ease-in-out infinite;
+      }
+      .payment-wa-btn:hover {
+        background: #a5e3ff;
+      }
+      .package-card {
+        border-width: 1px;
+        border-style: solid;
+      }
+      .package-card-1 {
+        border-color: rgba(56, 189, 248, 0.7);
+        box-shadow: 0 0 22px rgba(56, 189, 248, 0.35), 0 0 50px rgba(56, 189, 248, 0.2);
+        background: rgba(56, 189, 248, 0.06);
+      }
+      .package-card-2 {
+        border-color: rgba(234, 179, 8, 0.75);
+        box-shadow: 0 0 24px rgba(234, 179, 8, 0.35), 0 0 55px rgba(234, 179, 8, 0.22);
+        background: rgba(234, 179, 8, 0.08);
+      }
+      .package-card-selected-1 {
+        box-shadow: 0 0 30px rgba(56, 189, 248, 0.55), 0 0 70px rgba(56, 189, 248, 0.3);
+      }
+      .package-card-selected-2 {
+        box-shadow: 0 0 32px rgba(234, 179, 8, 0.55), 0 0 75px rgba(234, 179, 8, 0.3);
+      }
+      .package-btn-1 {
+        background: #7dd3fc;
+        color: #04223a;
+        box-shadow: 0 0 18px rgba(56, 189, 248, 0.7), 0 0 40px rgba(56, 189, 248, 0.45);
+        animation: heroBounce 2.2s ease-in-out infinite;
+      }
+      .package-btn-1:hover {
+        background: #a5e3ff;
+      }
+      .package-btn-2 {
+        background: #fbbf24;
+        color: #2a1700;
+        box-shadow: 0 0 18px rgba(234, 179, 8, 0.7), 0 0 40px rgba(234, 179, 8, 0.45);
+        animation: heroBounce 2.2s ease-in-out infinite;
+      }
+      .package-btn-2:hover {
+        background: #fde047;
+      }
+      .hero-include-btn {
+        box-shadow: 0 0 18px rgba(56, 189, 248, 0.75), 0 0 40px rgba(56, 189, 248, 0.45);
+        animation: heroBounce 2.2s ease-in-out infinite;
+      }
+      .floating-menu-icon {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        height: 2rem;
+        width: 2rem;
+        border-radius: 0.45rem;
+        background: rgba(0, 0, 0, 0.1);
+      }
+      .floating-menu-icon img {
+        height: 100%;
+        width: 100%;
+        object-fit: contain;
+      }
+      .floating-menu-icon-instagram img {
+        transform: scale(2.2);
+      }
+      .floating-menu-icon-whatsapp img {
+        transform: scale(1.12);
+      }
+      @keyframes spin360cw {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+      @keyframes spin360ccw {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(-360deg);
+        }
+      }
+      @keyframes floatDrop {
+        0% {
+          transform: translateY(-40px);
+          opacity: 0;
+        }
+        70% {
+          transform: translateY(6px);
+          opacity: 1;
+        }
+        100% {
+          transform: translateY(0);
+          opacity: 1;
+        }
+      }
+      @keyframes heroBounce {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-6px);
+        }
       }
     `}</style>
   );
