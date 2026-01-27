@@ -1830,8 +1830,8 @@ function FloatingLibraryMenu({
           <a
             href={waLink}
             className="floating-menu-item floating-menu-item-whatsapp"
-            onClick={(event) => {
-              trackContact(event);
+            onClick={() => {
+              trackContact();
               setOpen(false);
             }}
           >
