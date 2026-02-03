@@ -1748,7 +1748,7 @@ function CopyRow({
 
 function Footer({ waLink }: { waLink: string }) {
   return (
-    <footer className="mx-auto w-full max-w-6xl px-5 pb-16 pt-8" aria-label="Footer">
+    <footer id="politica-privacidad" className="mx-auto w-full max-w-6xl px-5 pb-16 pt-8 scroll-mt-24" aria-label="Footer">
       <div className="card-neo p-6">
         <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
           <div className="flex items-center gap-4">
@@ -1769,6 +1769,9 @@ function Footer({ waLink }: { waLink: string }) {
             <div>Material educativo – No afiliado al ICFES</div>
           </div>
         </div>
+        <p className="mt-4 border-t border-white/10 pt-4 text-xs text-white/70">
+          Recopilamos nombre y mensajes solo para fines de contacto y asesoría. No compartimos datos con terceros.
+        </p>
       </div>
     </footer>
   );
