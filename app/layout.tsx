@@ -31,10 +31,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {/* Meta Pixel (global) - App Router via next/script */}
+      <head>
+        {/* Meta Pixel principal: carga global tras hidratar la app */}
         <Script id="meta-pixel" strategy="afterInteractive">
           {`
             !function(f,b,e,v,n,t,s)
@@ -45,16 +43,21 @@ export default function RootLayout({
             t.src=v;s=b.getElementsByTagName(e)[0];
             s.parentNode.insertBefore(t,s)}(window, document,'script',
             'https://connect.facebook.net/en_US/fbevents.js');
-            fbq('init', '1715377266514038');
+            fbq('init', '1509196466321053');
             fbq('track', 'PageView');
           `}
         </Script>
+      </head>
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+      >
+        {/* Fallback sin JS: mantiene PageView en navegadores con scripts desactivados */}
         <noscript>
           <img
             height="1"
             width="1"
             style={{ display: "none" }}
-            src="https://www.facebook.com/tr?id=1715377266514038&ev=PageView&noscript=1"
+            src="https://www.facebook.com/tr?id=1509196466321053&ev=PageView&noscript=1"
             alt=""
           />
         </noscript>
