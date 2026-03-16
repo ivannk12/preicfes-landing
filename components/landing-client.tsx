@@ -40,8 +40,8 @@ const BANCOLOMBIA_ACCOUNT = "75675989958";
 const ACCOUNT_HOLDER = "Iván Gómez";
 const LLAVE = "3168695397";
 
-// Deadline del contador (15 marzo 2026)
-const DEADLINE_ISO = "2026-03-15T23:59:59-05:00"; // America/Bogota
+// Deadline del contador (26 julio 2026)
+const DEADLINE_ISO = "2026-07-26T23:59:59-05:00"; // America/Bogota
 
 // Mini test gratuito (Drive directo)
 const MINI_TEST_DRIVE_LINK = "https://drive.google.com/drive/folders/17WRXPAIuOKi0PkE0pkpLfy4asH-mJIVV?usp=drive_link"; // 🔗 pega aquí el link directo al Drive del mini test
@@ -397,7 +397,13 @@ function Hero({
                 Entrega inmediata por WhatsApp
               </span>
               <span className="h-1 w-1 rounded-full bg-white/30" />
-              <a className="underline hover:text-white" href={waLink} onClick={trackContact}>
+              <a
+                className="underline hover:text-white"
+                href={waLink}
+                target="_blank"
+                rel="noreferrer"
+                onClick={() => trackContact({ channel: "whatsapp", cta_location: "hero_dudas" })}
+              >
                 ¿Dudas? Escríbeme
               </a>
             </div>
@@ -1306,7 +1312,13 @@ function GuaranteeSection({ waLink }: { waLink: string }) {
           </div>
 
           {/* Meta Pixel Contact event: reuse trackContact on WhatsApp CTAs */}
-          <a href={waLink} className="btn-secondary" onClick={trackContact}>
+          <a
+            href={waLink}
+            className="btn-secondary"
+            target="_blank"
+            rel="noreferrer"
+            onClick={() => trackContact({ channel: "whatsapp", cta_location: "garantia" })}
+          >
             Hablar por WhatsApp
           </a>
         </div>
@@ -1332,7 +1344,7 @@ function LimitedOfferSection({ deadlineISO, onGoPay }: { deadlineISO: string; on
               A medida que se acerque el ICFES, el precio sube
             </h2>
             <p className="mt-2 text-sm text-white/70">
-              Aprovecha el precio actual. Contador hasta el <b className="text-white">15 de marzo de 2026</b>.
+              Aprovecha el precio actual. Contador hasta el <b className="text-white">26 de julio de 2026</b>.
             </p>
           </div>
 
@@ -1688,10 +1700,22 @@ function PaymentsSection({
         </p>
 
         <div className="mt-4 flex flex-col gap-3 sm:flex-row">
-          <a href={proofLink} className="btn-primary payment-wa-btn" onClick={trackContact}>
+          <a
+            href={proofLink}
+            className="btn-primary payment-wa-btn"
+            target="_blank"
+            rel="noreferrer"
+            onClick={() => trackContact({ channel: "whatsapp", cta_location: "pago_comprobante" })}
+          >
             Enviar comprobante por WhatsApp
           </a>
-            <a href={waInfo} className="btn-secondary">
+            <a
+              href={waInfo}
+              className="btn-secondary"
+              target="_blank"
+              rel="noreferrer"
+              onClick={() => trackContact({ channel: "whatsapp", cta_location: "pago_pregunta" })}
+            >
               Hacer una pregunta
             </a>
         </div>
@@ -1833,8 +1857,10 @@ function FloatingLibraryMenu({
           <a
             href={waLink}
             className="floating-menu-item floating-menu-item-whatsapp"
+            target="_blank"
+            rel="noreferrer"
             onClick={() => {
-              trackContact();
+              trackContact({ channel: "whatsapp", cta_location: "flotante" });
               setOpen(false);
             }}
           >
